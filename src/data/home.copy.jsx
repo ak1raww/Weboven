@@ -17,7 +17,7 @@ export const manifestoContent = {
   label: "il mio approccio",
   title: "Il web è cambiato. Il tuo modo no.",
   body: [
-    "Ogni progetto che porto avanti nasce da una domanda semplice: Cosa manca davvero, al tuo business? Non mi interessa fare siti. Mi interessa costruire quello che ti serve davvero.",
+    "Ogni progetto che porto avanti nasce da una domanda semplice: Cosa manca davvero al tuo business? Non mi interessa fare siti. Mi interessa costruire quello che ti serve davvero.",
     "Ho passato anni a capire come funziona la mente di chi naviga. Come decide. Come si ferma. Come clicca. Quel processo — da straniero a cliente — è la cosa che vivo ogni giorno.",
   ],
 };
