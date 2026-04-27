@@ -40,7 +40,7 @@ export const metodoValoriContent = {
 
 export const metodoCtaContent = {
   title: "Hai trovato quello che cercavi?",
-  sub: "Se senti che c'è affinità, scriviamo.",
+  sub: "Scrivimi, sei nel posto giusto.",
   cta: "Scrivimi",
   href: "/contatto",
 };
