@@ -5,7 +5,7 @@
 export const contattoHeroContent = {
   eyebrow: "contatto",
   title: "Parliamoci.",
-  sub: "Raccontami il tuo progetto. Anche se è ancora un'idea vaga — spesso è da lì che nascono le cose migliori.",
+  sub: "Raccontami il tuo progetto. Anche se è ancora un'idea vaga, spesso è da lì che nascono le cose migliori.",
 };
 
 export const contattoCanaliContent = {
@@ -43,19 +43,19 @@ export const contattoFaqContent = {
   items: [
     {
       q: "Quanto costa un sito?",
-      a: "Dipende dal progetto. Un sito vetrina parte da €800, un e-commerce da €1.500. Ti faccio un preventivo chiaro dopo la prima chiamata — nessuna sorpresa.",
+      a: "Dipende dal progetto. Tendo prima a conoscere la persona e le sue esigenze. Di sicuro non sono un ''azienda'' che chiede 2500€ e fa un sito Wordpress copia incolla.",
     },
     {
       q: "Quanto tempo ci vuole?",
-      a: "Un sito vetrina: 2-3 settimane. Un e-commerce o web app: 4-8 settimane. Dipende dalla complessità e da quanto sei reattivo nei feedback.",
+      a: "Dipende dalla complessità e da quanto sei reattivo nei feedback. Il progetto meno impegnativo mi ha preso una settimana. Quello più complesso quasi un mese.",
     },
     {
       q: "Posso gestire il sito da solo dopo?",
-      a: "Sì. Ti consegno sempre un CMS configurato e ti spiego come usarlo. Non voglio che tu dipenda da me per ogni modifica.",
+      a: "Se te la senti, assolutamente si! Ti posso fare da guida per aiutarti a capire il funzionamento del sito e di come gestire i dati al suo interno. Se invece non te la senti, ci sono sempre io a tua disposizione!",
     },
     {
-      q: "Lavori solo su nuovi progetti o anche su siti già esistenti?",
-      a: "Entrambe le cose. Se hai già un sito che non funziona come dovrebbe, posso analizzarlo e dirti cosa si può migliorare.",
+      q: "Ho già un sito, come facciamo?",
+      a: "Se hai già un sito che non funziona come dovrebbe, o ti è stato creato da un ragazzo in giacca e cravatta che ''sa fare siti'' e ti ha creato un sito con Framework di 20 anni fa, chiedendoti una cifra considerevole per un sito brutto e copia incollato, ci penso io a riparare i danni.",
     },
   ],
 };

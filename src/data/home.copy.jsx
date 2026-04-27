@@ -56,7 +56,7 @@ export const numbersContent = {
 };
 
 export const quoteContent = {
-  text: "Puoi avere un sito. O puoi avere un sito e dei risultati.",
+  text: "Puoi avere un sito. O puoi avere un sito con dei risultati.",
   author: "- Alex",
 };
 
