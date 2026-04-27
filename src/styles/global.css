@@ -1,0 +1,423 @@
+/* ─────────────────────────────────────────────
+   WEBOVEN — Design System
+   Dark luxury · Liquid Glass · Cinzel + DM Sans
+───────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Cinzel:wght@400;700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap');
+
+/* ── TOKENS ── */
+:root {
+  --bg:          #050507;
+  --bg-mid:      #090910;
+  --surface:     rgba(255,255,255,0.04);
+  --surface-hi:  rgba(255,255,255,0.08);
+  --border:      rgba(255,255,255,0.07);
+  --border-hi:   rgba(255,255,255,0.15);
+
+  --accent:      #e8d5b0;   /* warm gold */
+  --accent-dim:  rgba(232,213,176,0.15);
+  --accent-glow: rgba(232,213,176,0.08);
+
+  --text-1:  #f0ece4;
+  --text-2:  rgba(240,236,228,0.55);
+  --text-3:  rgba(240,236,228,0.30);
+
+  --font-display: 'Cinzel', serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-brand:   'Cal Sans', sans-serif;
+
+  --radius-sm:  8px;
+  --radius-md:  16px;
+  --radius-lg:  24px;
+  --radius-xl:  40px;
+
+  --ease-out: cubic-bezier(0.16,1,0.3,1);
+  --ease-in-out: cubic-bezier(0.65,0,0.35,1);
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 2px; }
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--text-1);
+}
+
+h1 { font-size: clamp(2.4rem, 6vw, 5.5rem); }
+h2 { font-size: clamp(2rem, 4.5vw, 3.8rem); }
+h3 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-family: var(--font-body); font-weight: 500; }
+h4 { font-size: 1.1rem; font-family: var(--font-body); font-weight: 500; }
+
+p { color: var(--text-2); line-height: 1.75; }
+a { color: inherit; text-decoration: none; }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+/* ── LIQUID GLASS BUTTON ── */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #0a0902;
+  box-shadow: 0 0 40px rgba(232,213,176,0.2), 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 60px rgba(232,213,176,0.35), 0 8px 30px rgba(0,0,0,0.5);
+}
+
+/* Liquid Glass button */
+.btn-glass {
+  background: rgba(255,255,255,0.06);
+  color: var(--text-1);
+  border: 1px solid var(--border-hi);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    inset 0 -1px 0 rgba(0,0,0,0.2),
+    0 4px 20px rgba(0,0,0,0.3);
+}
+
+.btn-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.12) 0%,
+    rgba(255,255,255,0.0) 50%,
+    rgba(255,255,255,0.04) 100%);
+  pointer-events: none;
+}
+
+.btn-glass:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.10);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    inset 0 -1px 0 rgba(0,0,0,0.15),
+    0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* ── GLASS CARD ── */
+.glass-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 20px 60px rgba(0,0,0,0.4);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s var(--ease-out);
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.05) 0%,
+    transparent 60%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.glass-card:hover {
+  border-color: var(--border-hi);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 30px 80px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(232,213,176,0.08);
+  transform: translateY(-4px);
+}
+
+/* ── SECTION ── */
+.section {
+  padding: clamp(80px, 12vw, 160px) clamp(20px, 5vw, 80px);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.6;
+}
+
+/* ── AMBIENT BACKGROUND ── */
+.ambient {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.12;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--border-hi) 30%,
+    var(--border-hi) 70%,
+    transparent 100%);
+  margin: 0 auto;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── HORIZONTAL RULE ACCENT ── */
+.hr-accent {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent-dim), transparent);
+  margin: 60px 0;
+}
+
+/* ── TAG CHIP ── */
+.chip {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── GRID HELPERS ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+@media (max-width: 900px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ── CURSOR ── */
+* { cursor: none; }
+
+#custom-cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s var(--ease-out), opacity 0.3s;
+  transform: translate(-50%, -50%);
+}
+
+#cursor-follower {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(232,213,176,0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.4s var(--ease-out), width 0.3s, height 0.3s, opacity 0.3s;
+  transform: translate(-50%, -50%);
+}
+
+/* ── SCROLL PROGRESS BAR ── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  z-index: 9990;
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-fade-up   { animation: fadeUp 0.8s var(--ease-out) both; }
+.animate-fade-in   { animation: fadeIn 0.6s var(--ease-out) both; }
+.animate-scale-in  { animation: scaleIn 0.7s var(--ease-out) both; }
+
+/* stagger delays */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.35s; }
+.delay-4 { animation-delay: 0.5s; }
+.delay-5 { animation-delay: 0.65s; }
+
+/* ── HIGHLIGHT TEXT ── */
+.text-accent {
+  color: var(--accent);
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg,
+    var(--text-1) 0%,
+    var(--accent) 40%,
+    var(--text-1) 60%,
+    var(--accent) 80%,
+    var(--text-1) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ── SELECTION ── */
+::selection {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* ── WEBOVEN LUXURY STRIKE ── */
+.strike-zone-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.big-x-pc {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.big-x-pc::before,
+.big-x-pc::after {
+  content: "";
+  position: absolute;
+  /* This prevents the "squashed" look on PC */
+  width: 110%; 
+  max-width: 1300px; 
+  height: 10px;
+  background: var(--accent);
+  box-shadow: 0 0 40px var(--accent-glow);
+  border-radius: var(--radius-xl);
+  opacity: 0.9;
+}
+
+/* Hardcoded angles look better than fluid ones on desktop */
+.big-x-pc::before { transform: rotate(12deg); }
+.big-x-pc::after { transform: rotate(-12deg); }
+
+/* On mobile, we steepen the angle because the grid is taller */
+@media (max-width: 900px) {
+  .big-x-pc::before { transform: rotate(45deg); }
+  .big-x-pc::after { transform: rotate(-45deg); }
+  .big-x-pc::before, .big-x-pc::after { width: 140%; }
+}
+
+.grid-faded {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  width: 100%;
+  opacity: 0.25; /* Dark luxury fade */
+}
