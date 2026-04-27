@@ -49,22 +49,22 @@ function NumberCard({ item, index }) {
 }
 
 /* ── Hero with parallax ──
- * FIX: Use window-level scroll (no `target` ref) so Chrome & Safari
- * track the same scroll source as Firefox. The `target` prop on useScroll
- * causes Chromium/WebKit to look for a scrollable ancestor of the ref,
- * which is `<main>` (position:relative / z-index:2) — not the window —
- * breaking the progress value on those engines.
+ * On desktop: scroll-driven parallax via framer-motion useScroll.
+ * On mobile: parallax disabled entirely — imperceptible on phones and
+ * expensive. All hero text uses CSS keyframe animations instead of
+ * framer-motion initial/animate, so content is visible immediately
+ * without waiting for the framer-motion JS bundle to finish parsing.
+ * This is the root cause of "only eyebrow shows" on slow mobile —
+ * the eyebrow uses a CSS class, everything else was opacity:0 waiting
+ * for JS. CSS animations run as soon as the stylesheet loads.
  */
 function Hero() {
   const ref = useRef(null)
-
-  // Track window scroll, map first viewport height to [0,1]
   const { scrollY } = useScroll()
-
-  // We don't know window.innerHeight at module scope, so derive it lazily
-  // via a transform that maps 0..600 → effects. 600px ≈ typical hero height.
   const y = useTransform(scrollY, [0, 600], [0, 120])
   const opacity = useTransform(scrollY, [0, 420], [1, 0])
+
+  const isMobile = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
 
   return (
     <section
@@ -78,46 +78,36 @@ function Hero() {
       }}
     >
       <motion.div
-        style={{
+        style={isMobile ? {
+          width: '100%',
+          padding: '120px clamp(20px,5vw,80px) 80px',
+        } : {
           y,
           opacity,
           width: '100%',
           padding: '120px clamp(20px,5vw,80px) 80px',
-          // GPU compositing hint — fixes Safari jank on transforms
           willChange: 'transform, opacity',
         }}
       >
-        <motion.p
-          className="eyebrow animate-fade-up"
-          style={{ marginBottom: 20 }}
-        >
+        <p className="eyebrow animate-fade-up" style={{ marginBottom: 20 }}>
           {heroContent.eyebrow}
-        </motion.p>
+        </p>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          style={{ maxWidth: 900 }}
-        >
+        <h1 className="hero-fade-up hero-delay-1" style={{ maxWidth: 900 }}>
           <span className="text-shimmer">{heroContent.name}</span>
           <br />
           <span style={{ display: 'block', marginTop: 8 }}>{heroContent.tagline}</span>
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        <p
+          className="hero-fade-up hero-delay-2"
           style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)', maxWidth: 560, marginTop: 24, marginBottom: 48, color: 'var(--text-2)' }}
         >
           {heroContent.sub}
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        <div
+          className="hero-fade-up hero-delay-3"
           style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}
         >
           <Link to={heroContent.cta.primary.href} className="btn btn-primary">
@@ -126,14 +116,12 @@ function Hero() {
           <a href={heroContent.cta.secondary.href} className="btn btn-glass">
             {heroContent.cta.secondary.label}
           </a>
-        </motion.div>
+        </div>
       </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+      {/* Scroll indicator — CSS animated, no framer-motion */}
+      <div
+        className="hero-fade-up hero-delay-4"
         style={{
           position: 'absolute', bottom: 40, left: '50%',
           transform: 'translateX(-50%)',
@@ -142,12 +130,28 @@ function Hero() {
         }}
       >
         <p style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-3)' }}>Scorri</p>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--accent), transparent)' }}
-        />
-      </motion.div>
+        <div className="scroll-bounce" style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--accent), transparent)' }} />
+      </div>
+
+      <style>{`
+        @keyframes heroFadeUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scrollBounce {
+          0%, 100% { transform: translateY(0); }
+          50%       { transform: translateY(8px); }
+        }
+        .hero-fade-up {
+          opacity: 0;
+          animation: heroFadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+        .hero-delay-1 { animation-delay: 0.1s; }
+        .hero-delay-2 { animation-delay: 0.3s; }
+        .hero-delay-3 { animation-delay: 0.5s; }
+        .hero-delay-4 { animation-delay: 1.2s; }
+        .scroll-bounce { animation: scrollBounce 1.6s ease-in-out infinite; }
+      `}</style>
     </section>
   )
 }
