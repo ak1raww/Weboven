@@ -34,6 +34,34 @@ export default function MainLayout({ children }) {
       <div id="scroll-progress" />
       <div className="noise-overlay" aria-hidden />
 
+      {/*
+        Background grid — applied globally on every page.
+        Positioned fixed so it covers the whole viewport regardless of scroll.
+        pointer-events:none and z-index:0 so it never interferes with content.
+        
+        FIX for Safari performance: transform:translateZ(0) forces this layer
+        onto the GPU compositing stack so it doesn't trigger repaints on scroll.
+      */}
+      <div
+        aria-hidden
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)',
+          backgroundSize: '80px 80px',
+          maskImage:
+            'radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)',
+          WebkitMaskImage:
+            'radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)',
+          // GPU compositing hint — critical for Safari not to repaint this on every scroll frame
+          transform: 'translateZ(0)',
+          willChange: 'transform',
+        }}
+      />
+
       <CustomCursor />
       <Navbar />
 

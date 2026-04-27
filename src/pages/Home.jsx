@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform, useViewportScroll } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import ScrollReveal from '../components/ScrollReveal'
 import AmbientBg from '../components/AmbientBg'
 import {
@@ -48,24 +48,45 @@ function NumberCard({ item, index }) {
   )
 }
 
-/* ── Hero with parallax ── */
+/* ── Hero with parallax ──
+ * FIX: Use window-level scroll (no `target` ref) so Chrome & Safari
+ * track the same scroll source as Firefox. The `target` prop on useScroll
+ * causes Chromium/WebKit to look for a scrollable ancestor of the ref,
+ * which is `<main>` (position:relative / z-index:2) — not the window —
+ * breaking the progress value on those engines.
+ */
 function Hero() {
   const ref = useRef(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
-  const y = useTransform(scrollYProgress, [0, 1], [0, 120])
-  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+
+  // Track window scroll, map first viewport height to [0,1]
+  const { scrollY } = useScroll()
+
+  // We don't know window.innerHeight at module scope, so derive it lazily
+  // via a transform that maps 0..600 → effects. 600px ≈ typical hero height.
+  const y = useTransform(scrollY, [0, 600], [0, 120])
+  const opacity = useTransform(scrollY, [0, 420], [1, 0])
 
   return (
-    <section ref={ref} style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative', overflow: 'hidden' }}>
-      {/* Background grid */}
-      <div aria-hidden style={{
-        position: 'absolute', inset: 0,
-        backgroundImage: 'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)',
-        backgroundSize: '80px 80px',
-        maskImage: 'radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)',
-      }} />
-
-      <motion.div style={{ y, opacity, width: '100%', padding: '120px clamp(20px,5vw,80px) 80px' }}>
+    <section
+      ref={ref}
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <motion.div
+        style={{
+          y,
+          opacity,
+          width: '100%',
+          padding: '120px clamp(20px,5vw,80px) 80px',
+          // GPU compositing hint — fixes Safari jank on transforms
+          willChange: 'transform, opacity',
+        }}
+      >
         <motion.p
           className="eyebrow animate-fade-up"
           style={{ marginBottom: 20 }}
@@ -113,7 +134,12 @@ function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        style={{ position: 'absolute', bottom: 40, left: '50%', transform: 'translateX(-50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, pointerEvents: 'none' }}
+        style={{
+          position: 'absolute', bottom: 40, left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+          pointerEvents: 'none',
+        }}
       >
         <p style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-3)' }}>Scorri</p>
         <motion.div
@@ -186,7 +212,7 @@ function Numbers() {
   return (
     <section style={{ padding: '0 clamp(20px,5vw,80px) clamp(80px,10vw,140px)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        
+
         <ScrollReveal>
           <div className="section-label">
             <span className="eyebrow">{numbersContent.label}</span>
@@ -194,9 +220,8 @@ function Numbers() {
         </ScrollReveal>
 
         <div className="strike-zone-wrapper">
-          {/* The Big Bold X */}
           <div className="big-x-pc" aria-hidden="true" />
-          
+
           <div className="grid-faded">
             {numbersContent.items.map((item, i) => (
               <NumberCard key={i} item={item} index={i} />
@@ -212,10 +237,10 @@ function Numbers() {
             <p style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', color: 'var(--text-1)' }}>
               Non mi servono i numeri per far crescere la tua attività.
             </p>
-            <span className="gold-leaf" style={{ 
-              display: 'block', 
-              marginTop: '20px', 
-              color: 'var(--accent)', 
+            <span className="gold-leaf" style={{
+              display: 'block',
+              marginTop: '20px',
+              color: 'var(--accent)',
               fontFamily: 'var(--font-display)',
               fontSize: '2rem',
             }}>
@@ -226,7 +251,7 @@ function Numbers() {
 
       </div>
     </section>
-  );
+  )
 }
 
 /* ── Quote Break ── */
@@ -265,7 +290,6 @@ function ContactSection() {
     <section id={contactContent.id} style={{ padding: 'clamp(80px,10vw,140px) clamp(20px,5vw,80px)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div className="glass-card" style={{ padding: 'clamp(48px,6vw,80px)', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-          {/* Glow background */}
           <div aria-hidden style={{
             position: 'absolute', top: '50%', left: '50%',
             transform: 'translate(-50%, -50%)',
