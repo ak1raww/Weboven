@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weboven</title>
+  <title>Weboven — Loading</title>
   <script>
-    sessionStorage.redirect = location.pathname + location.search + location.hash
+    // Store the intended path and redirect to the SPA entry point
+    sessionStorage.setItem('redirect', location.pathname + location.search + location.hash)
     location.replace('/')
   </script>
 </head>
