@@ -12,7 +12,6 @@ export default function MainLayout({ children }) {
 
   return (
     <>
-      {/* Background grid – fixed, GPU accelerated */}
       <div
         aria-hidden
         style={{
@@ -32,7 +31,11 @@ export default function MainLayout({ children }) {
         }}
       />
       <Navbar />
-      <main style={{ position: 'relative', zIndex: 2 }}>{children}</main>
+      <main style={{ position: 'relative', zIndex: 2 }}>
+        <div key={pathname} className="page-transition">
+          {children}
+        </div>
+      </main>
       <Footer />
     </>
   )

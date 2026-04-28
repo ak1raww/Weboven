@@ -52,38 +52,15 @@ function CanalCard({ item, index }) {
 }
 
 function FaqItem({ item, index }) {
-  const [open, setOpen] = useState(false)
   return (
     <ScrollReveal delay={index * 0.08} y={20}>
-      <div
-        style={{
-          borderBottom: '1px solid var(--border)',
-          padding: '24px 0',
-          cursor: 'pointer',
-        }}
-        onClick={() => setOpen(!open)}
-      >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
-          <h4 style={{ fontFamily: 'var(--font-body)', fontSize: '1rem', fontWeight: 500, color: 'var(--text-1)' }}>
-            {item.q}
-          </h4>
-          <span
-            animate={{ rotate: open ? 45 : 0 }}
-            transition={{ duration: 0.3 }}
-            style={{ color: 'var(--accent)', fontSize: '1.4rem', lineHeight: 1, flexShrink: 0 }}
-          >
-            +
-          </span>
+      <div className="faq-item-hover">
+        <div className="faq-question-hover">
+          <span>{item.q}</span>
+          <span className="faq-icon-hover">+</span>
         </div>
-        <div
-          initial={false}
-          animate={{ height: open ? 'auto' : 0, opacity: open ? 1 : 0 }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          style={{ overflow: 'hidden' }}
-        >
-          <p style={{ paddingTop: 14, fontSize: '0.93rem', lineHeight: 1.8 }}>
-            {item.a}
-          </p>
+        <div className="faq-answer-hover">
+          <p>{item.a}</p>
         </div>
       </div>
     </ScrollReveal>
@@ -101,13 +78,13 @@ export default function Contatto() {
       {/* Hero */}
       <section style={{ minHeight: '50vh', display: 'flex', alignItems: 'flex-end', padding: 'clamp(120px,14vw,200px) clamp(20px,5vw,80px) clamp(60px,6vw,80px)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
-          <p className="eyebrow" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ marginBottom: 20 }}>
+          <p className="eyebrow" style={{ marginBottom: 20, opacity: 0, animation: 'fadeUp 0.7s forwards' }}>
             {contattoHeroContent.eyebrow}
           </p>
-          <h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: [0.16,1,0.3,1] }}>
+          <h1 style={{ opacity: 0, animation: 'fadeUp 0.9s 0.1s forwards' }}>
             {contattoHeroContent.title}
           </h1>
-          <p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} style={{ maxWidth: 500, marginTop: 24, fontSize: '1.05rem' }}>
+          <p style={{ maxWidth: 500, marginTop: 24, fontSize: '1.05rem', opacity: 0, animation: 'fadeUp 0.8s 0.25s forwards' }}>
             {contattoHeroContent.sub}
           </p>
         </div>

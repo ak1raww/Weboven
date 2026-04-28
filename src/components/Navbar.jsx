@@ -24,6 +24,7 @@ export default function Navbar() {
   return (
     <>
       <nav
+        className={`navbar ${scrolled ? 'scrolled' : ''}`}
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
           padding: scrolled ? '14px 32px' : '24px 32px',
@@ -34,89 +35,117 @@ export default function Navbar() {
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         }}
       >
-        <Link to="/" style={{ fontFamily: 'var(--font-brand)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--accent)', letterSpacing: '0.1em' }}>
+        <Link to="/" className="logo" style={{ fontFamily: 'var(--font-brand)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--accent)', letterSpacing: '0.1em' }}>
           Weboven
         </Link>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }} className="nav-desktop">
+        <div className="nav-desktop">
           {NAV_LINKS.map(l => (
             <Link
               key={l.href}
               to={l.href}
-              style={{
-                padding: '8px 16px',
-                borderRadius: 100,
-                fontSize: '0.85rem',
-                fontWeight: 500,
-                color: location.pathname === l.href ? 'var(--accent)' : 'var(--text-2)',
-                background: location.pathname === l.href ? 'var(--accent-dim)' : 'transparent',
-                transition: 'color 0.2s, background 0.2s',
-              }}
+              className={`nav-link ${location.pathname === l.href ? 'active' : ''}`}
             >
               {l.label}
             </Link>
           ))}
-          <a href="/contatto" className="btn btn-primary" style={{ padding: '9px 22px', fontSize: '0.82rem', marginLeft: 8 }}>
-            Parliamoci
-          </a>
+          <a href="/contatto" className="btn btn-primary">Parliamoci</a>
         </div>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="nav-mobile-toggle"
-          style={{
-            background: 'none', border: 'none', color: 'var(--text-1)',
-            display: 'flex', flexDirection: 'column', gap: 5, cursor: 'pointer', padding: 4,
-          }}
-          aria-label="Menu"
-        >
-          <span style={{ display: 'block', width: 22, height: 1.5, background: 'var(--text-1)', borderRadius: 2, transition: 'all 0.3s', transform: open ? 'rotate(45deg) translateY(8px)' : 'none' }} />
-          <span style={{ display: 'block', width: 22, height: 1.5, background: 'var(--text-1)', borderRadius: 2, transition: 'all 0.3s', opacity: open ? 0 : 1 }} />
-          <span style={{ display: 'block', width: 22, height: 1.5, background: 'var(--text-1)', borderRadius: 2, transition: 'all 0.3s', transform: open ? 'rotate(-45deg) translateY(-8px)' : 'none' }} />
+        <button onClick={() => setOpen(!open)} className="nav-mobile-toggle" aria-label="Menu">
+          <span className="bar" />
+          <span className="bar" />
+          <span className="bar" />
         </button>
       </nav>
 
-      <div
-        className={`mobile-menu ${open ? 'open' : ''}`}
-        style={{
-          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(5,5,7,0.97)',
-          backdropFilter: 'blur(24px)',
-          zIndex: 999,
-          display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center', gap: 16,
-          opacity: 0, visibility: 'hidden',
-          transition: 'opacity 0.4s ease, visibility 0.4s ease',
-        }}
-      >
+      <div className={`mobile-menu ${open ? 'open' : ''}`}>
         {NAV_LINKS.map(l => (
-          <Link
-            key={l.href}
-            to={l.href}
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2rem, 8vw, 3rem)',
-              color: location.pathname === l.href ? 'var(--accent)' : 'var(--text-1)',
-              fontWeight: 700,
-            }}
-          >
+          <Link key={l.href} to={l.href} className="mobile-nav-link">
             {l.label}
           </Link>
         ))}
-        <a href="/contatto" className="btn btn-primary" style={{ marginTop: 24, fontSize: '1rem', padding: '14px 40px' }}>
-          Parliamoci
-        </a>
+        <a href="/contatto" className="btn btn-primary">Parliamoci</a>
       </div>
 
       <style>{`
-        .nav-mobile-toggle { display: none !important; }
-        @media (max-width: 768px) {
-          .nav-desktop { display: none !important; }
-          .nav-mobile-toggle { display: flex !important; }
+        .nav-desktop {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .nav-link {
+          padding: 8px 16px;
+          border-radius: 100px;
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: var(--text-2);
+          background: transparent;
+          transition: all 0.2s ease;
+          text-decoration: none;
+        }
+        .nav-link:hover {
+          color: var(--accent);
+          background: var(--accent-dim);
+          transform: translateY(-1px);
+        }
+        .nav-link.active {
+          color: var(--accent);
+          background: var(--accent-dim);
+        }
+        .nav-mobile-toggle {
+          display: none;
+          background: none;
+          border: none;
+          flex-direction: column;
+          gap: 5px;
+          cursor: pointer;
+          padding: 4px;
+        }
+        .nav-mobile-toggle .bar {
+          display: block;
+          width: 22px;
+          height: 1.5px;
+          background: var(--text-1);
+          border-radius: 2px;
+          transition: all 0.3s ease;
+        }
+        .mobile-menu {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(5,5,7,0.97);
+          backdrop-filter: blur(24px);
+          z-index: 999;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 32px;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.4s ease, visibility 0.4s ease;
         }
         .mobile-menu.open {
-          opacity: 1 !important;
-          visibility: visible !important;
+          opacity: 1;
+          visibility: visible;
+        }
+        .mobile-nav-link {
+          font-family: var(--font-display);
+          font-size: clamp(2rem, 8vw, 3rem);
+          color: var(--text-1);
+          font-weight: 700;
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+        .mobile-nav-link:hover {
+          color: var(--accent);
+        }
+        @media (max-width: 768px) {
+          .nav-desktop { display: none; }
+          .nav-mobile-toggle { display: flex; }
         }
       `}</style>
     </>

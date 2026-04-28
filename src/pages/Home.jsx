@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import ScrollReveal from '../components/ScrollReveal'
 import AmbientBg from '../components/AmbientBg'
@@ -47,17 +46,10 @@ function NumberCard({ item, index }) {
   )
 }
 
+/* ── Hero (pure CSS animations, no framer-motion) ── */
 function Hero() {
-  const ref = useRef(null)
-  const { scrollY } = useScroll()
-  const y = useTransform(scrollY, [0, 600], [0, 120])
-  const opacity = useTransform(scrollY, [0, 420], [1, 0])
-
-  const isMobile = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
-
   return (
     <section
-      ref={ref}
       style={{
         minHeight: '100vh',
         display: 'flex',
@@ -66,39 +58,32 @@ function Hero() {
         overflow: 'hidden',
       }}
     >
-      <div
-        style={isMobile ? {
-          width: '100%',
-          padding: '120px clamp(20px,5vw,80px) 80px',
-        } : {
-          y,
-          opacity,
-          width: '100%',
-          padding: '120px clamp(20px,5vw,80px) 80px',
-          willChange: 'transform, opacity',
-        }}
-      >
-        <p className="eyebrow animate-fade-up" style={{ marginBottom: 20 }}>
+      <div style={{ width: '100%', padding: '120px clamp(20px,5vw,80px) 80px' }}>
+        <p className="eyebrow animate-fade-up" style={{ marginBottom: 20, animationDelay: '0s' }}>
           {heroContent.eyebrow}
         </p>
 
-        <h1 className="hero-fade-up hero-delay-1" style={{ maxWidth: 900 }}>
+        <h1 className="animate-fade-up" style={{ maxWidth: 900, animationDelay: '0.1s' }}>
           <span className="text-shimmer">{heroContent.name}</span>
           <br />
           <span style={{ display: 'block', marginTop: 8 }}>{heroContent.tagline}</span>
         </h1>
 
         <p
-          className="hero-fade-up hero-delay-2"
-          style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)', maxWidth: 560, marginTop: 24, marginBottom: 48, color: 'var(--text-2)' }}
+          className="animate-fade-up"
+          style={{
+            fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+            maxWidth: 560,
+            marginTop: 24,
+            marginBottom: 48,
+            color: 'var(--text-2)',
+            animationDelay: '0.2s',
+          }}
         >
           {heroContent.sub}
         </p>
 
-        <div
-          className="hero-fade-up hero-delay-3"
-          style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}
-        >
+        <div className="animate-fade-up" style={{ display: 'flex', gap: 16, flexWrap: 'wrap', animationDelay: '0.3s' }}>
           <Link to={heroContent.cta.primary.href} className="btn btn-primary">
             {heroContent.cta.primary.label}
           </Link>
@@ -108,13 +93,15 @@ function Hero() {
         </div>
       </div>
 
+      {/* Scroll indicator */}
       <div
-        className="hero-fade-up hero-delay-4"
+        className="animate-fade-up"
         style={{
           position: 'absolute', bottom: 40, left: '50%',
           transform: 'translateX(-50%)',
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
           pointerEvents: 'none',
+          animationDelay: '0.6s',
         }}
       >
         <p style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-3)' }}>Scorri</p>
@@ -122,22 +109,10 @@ function Hero() {
       </div>
 
       <style>{`
-        @keyframes heroFadeUp {
-          from { opacity: 0; transform: translateY(40px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
         @keyframes scrollBounce {
           0%, 100% { transform: translateY(0); }
           50%       { transform: translateY(8px); }
         }
-        .hero-fade-up {
-          opacity: 0;
-          animation: heroFadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
-        }
-        .hero-delay-1 { animation-delay: 0.1s; }
-        .hero-delay-2 { animation-delay: 0.3s; }
-        .hero-delay-3 { animation-delay: 0.5s; }
-        .hero-delay-4 { animation-delay: 1.2s; }
         .scroll-bounce { animation: scrollBounce 1.6s ease-in-out infinite; }
       `}</style>
     </section>
@@ -157,9 +132,7 @@ function Manifesto() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1.2fr) minmax(0,1fr)', gap: 'clamp(40px,6vw,100px)', alignItems: 'start' }}>
           <ScrollReveal y={60}>
-            <h2 style={{ lineHeight: 1.1 }}>
-              {manifestoContent.title}
-            </h2>
+            <h2 style={{ lineHeight: 1.1 }}>{manifestoContent.title}</h2>
           </ScrollReveal>
 
           <div style={{ paddingTop: 8 }}>
@@ -204,7 +177,6 @@ function Numbers() {
   return (
     <section style={{ padding: '0 clamp(20px,5vw,80px) clamp(80px,10vw,140px)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-
         <ScrollReveal>
           <div className="section-label">
             <span className="eyebrow">{numbersContent.label}</span>
@@ -240,7 +212,6 @@ function Numbers() {
             </span>
           </div>
         </ScrollReveal>
-
       </div>
     </section>
   )
