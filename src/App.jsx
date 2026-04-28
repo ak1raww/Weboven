@@ -8,6 +8,12 @@ import Testimonianze from './pages/Testimonianze'
 import './styles/global.css'
 import Contatto from './pages/Contatto'
 
+// At the top of App.jsx, before your router
+const redirect = new URLSearchParams(window.location.search).get('redirect');
+if (redirect) {
+  window.history.replaceState(null, '', redirect);
+}
+
 export default function App() {
   return (
     <BrowserRouter>

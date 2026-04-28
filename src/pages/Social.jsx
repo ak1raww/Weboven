@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import ScrollReveal from '../components/ScrollReveal'
 import AmbientBg from '../components/AmbientBg'

@@ -12,6 +12,11 @@ export default function ScrollReveal({
   const ref = useRef(null)
   const inView = useInView(ref, { once, margin: '-80px 0px' })
 
+  // iOS fallback: if IntersectionObserver isn't available, skip animation
+  if (typeof IntersectionObserver === 'undefined') {
+    return <div style={style}>{children}</div>
+  }
+
   return (
     <motion.div
       ref={ref}
