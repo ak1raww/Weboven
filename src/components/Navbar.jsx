@@ -63,13 +63,13 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Link
-            to="/contatto"
+          <a
+            href="/contatto"
             className="btn btn-primary"
             style={{ padding: '9px 22px', fontSize: '0.82rem', marginLeft: 8 }}
           >
             Parliamoci
-          </Link>
+          </a>
         </div>
 
         {/* Mobile hamburger */}
@@ -132,19 +132,16 @@ export default function Navbar() {
                 </Link>
               </motion.div>
             ))}
-            <motion.div
+            <motion.a
+              href="/contatto"
+              className="btn btn-primary"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.42 }}
+              style={{ marginTop: 24, fontSize: '1rem', padding: '14px 40px' }}
             >
-              <Link
-                to="/contatto"
-                className="btn btn-primary"
-                style={{ marginTop: 24, fontSize: '1rem', padding: '14px 40px', display: 'inline-flex' }}
-              >
-                Parliamoci
-              </Link>
-            </motion.div>
+              Parliamoci
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>

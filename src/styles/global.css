@@ -14,7 +14,7 @@
   --border:      rgba(255,255,255,0.07);
   --border-hi:   rgba(255,255,255,0.15);
 
-  --accent:      #e8d5b0;
+  --accent:      #e8d5b0;   /* warm gold */
   --accent-dim:  rgba(232,213,176,0.15);
   --accent-glow: rgba(232,213,176,0.08);
 
@@ -111,6 +111,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 0 60px rgba(232,213,176,0.35), 0 8px 30px rgba(0,0,0,0.5);
 }
 
+/* Liquid Glass button */
 .btn-glass {
   background: rgba(255,255,255,0.06);
   color: var(--text-1);
@@ -240,11 +241,6 @@ a { color: inherit; text-decoration: none; }
   background-size: 200px 200px;
 }
 
-/* HIDE NOISE ON TOUCH DEVICES */
-@media (pointer: coarse) {
-  .noise-overlay { display: none; }
-}
-
 /* ── HORIZONTAL RULE ACCENT ── */
 .hr-accent {
   border: none;
@@ -279,10 +275,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ── CURSOR ── */
-/* Hide native cursor only on devices with a fine pointer (mouse) */
-@media (hover: hover) and (pointer: fine) {
-  * { cursor: none; }
-}
+* { cursor: none; }
 
 #custom-cursor {
   position: fixed;
@@ -345,13 +338,17 @@ a { color: inherit; text-decoration: none; }
 .animate-fade-in   { animation: fadeIn 0.6s var(--ease-out) both; }
 .animate-scale-in  { animation: scaleIn 0.7s var(--ease-out) both; }
 
+/* stagger delays */
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
 .delay-3 { animation-delay: 0.35s; }
 .delay-4 { animation-delay: 0.5s; }
 .delay-5 { animation-delay: 0.65s; }
 
-.text-accent { color: var(--accent); }
+/* ── HIGHLIGHT TEXT ── */
+.text-accent {
+  color: var(--accent);
+}
 
 .text-shimmer {
   background: linear-gradient(90deg,
@@ -367,19 +364,19 @@ a { color: inherit; text-decoration: none; }
   animation: shimmer 4s linear infinite;
 }
 
+/* ── SELECTION ── */
 ::selection {
   background: var(--accent-dim);
   color: var(--accent);
 }
 
-/* ── WEBOVEN LUXURY STRIKE (big X) ── */
+/* ── WEBOVEN LUXURY STRIKE ── */
 .strike-zone-wrapper {
   position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;            /* ← FIX: stop X arms from overflowing */
 }
 
 .big-x-pc {
@@ -396,8 +393,9 @@ a { color: inherit; text-decoration: none; }
 .big-x-pc::after {
   content: "";
   position: absolute;
-  width: 100%;
-  max-width: 100%;
+  /* This prevents the "squashed" look on PC */
+  width: 110%; 
+  max-width: 1300px; 
   height: 10px;
   background: var(--accent);
   box-shadow: 0 0 40px var(--accent-glow);
@@ -405,12 +403,15 @@ a { color: inherit; text-decoration: none; }
   opacity: 0.9;
 }
 
+/* Hardcoded angles look better than fluid ones on desktop */
 .big-x-pc::before { transform: rotate(12deg); }
-.big-x-pc::after  { transform: rotate(-12deg); }
+.big-x-pc::after { transform: rotate(-12deg); }
 
+/* On mobile, we steepen the angle because the grid is taller */
 @media (max-width: 900px) {
   .big-x-pc::before { transform: rotate(45deg); }
-  .big-x-pc::after  { transform: rotate(-45deg); }
+  .big-x-pc::after { transform: rotate(-45deg); }
+  .big-x-pc::before, .big-x-pc::after { width: 140%; }
 }
 
 .grid-faded {
@@ -418,5 +419,5 @@ a { color: inherit; text-decoration: none; }
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   width: 100%;
-  opacity: 0.25;
+  opacity: 0.25; /* Dark luxury fade */
 }

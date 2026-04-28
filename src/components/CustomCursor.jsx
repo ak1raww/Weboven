@@ -3,13 +3,32 @@ import { useEffect } from 'react'
 export default function CustomCursor() {
   useEffect(() => {
     const isTouch = window.matchMedia('(pointer: coarse)').matches
-    if (isTouch) return // do nothing on a touch device
 
     const dot = document.getElementById('custom-cursor')
     const ring = document.getElementById('cursor-follower')
     if (!dot || !ring) return
 
-    // Start hidden, reveal on first mousemove
+    if (isTouch) {
+      dot.style.display = 'none'
+      ring.style.display = 'none'
+      return
+    }
+
+    // Hide custom cursors and restore the native cursor
+    const hideCustom = () => {
+      dot.style.opacity = '0'
+      ring.style.opacity = '0'
+      document.documentElement.style.cursor = ''
+    }
+
+    // Show custom cursors and hide the native cursor
+    const showCustom = () => {
+      dot.style.opacity = '1'
+      ring.style.opacity = '1'
+      document.documentElement.style.cursor = 'none'
+    }
+
+    // Start hidden, native cursor hidden too — reveal on first mousemove inside page
     dot.style.opacity = '0'
     ring.style.opacity = '0'
     document.documentElement.style.cursor = 'none'
@@ -19,11 +38,10 @@ export default function CustomCursor() {
     let hasMovedOnce = false
 
     const onMove = (e) => {
+      // Mouse is over the scrollbar gutter — beyond the page's client area
       const overScrollbar = e.clientX >= document.documentElement.clientWidth
       if (overScrollbar) {
-        dot.style.opacity = '0'
-        ring.style.opacity = '0'
-        document.documentElement.style.cursor = ''
+        hideCustom()
         return
       }
 
@@ -33,22 +51,19 @@ export default function CustomCursor() {
       dot.style.top = my + 'px'
 
       if (!hasMovedOnce) {
+        // Snap ring to real position on first move so it doesn't lerp in from 0,0
         rx = mx
         ry = my
         hasMovedOnce = true
       }
 
-      dot.style.opacity = '1'
-      ring.style.opacity = '1'
-      document.documentElement.style.cursor = 'none'
+      showCustom()
     }
 
-    const onMouseLeave = () => {
-      dot.style.opacity = '0'
-      ring.style.opacity = '0'
-      document.documentElement.style.cursor = ''
-    }
+    // Mouse left the browser window entirely — restore native cursor
+    const onMouseLeave = () => hideCustom()
 
+    // Mouse re-entered the window — hide native cursor again (custom takes over on next mousemove)
     const onMouseEnter = () => {
       document.documentElement.style.cursor = 'none'
     }
