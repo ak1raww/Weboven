@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const NAV_LINKS = [
   { label: 'Web', href: '/web' },
@@ -23,129 +24,136 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
-        className={`navbar ${scrolled ? 'scrolled' : ''}`}
+      <motion.nav
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
           padding: scrolled ? '14px 32px' : '24px 32px',
           transition: 'padding 0.4s ease, background 0.4s ease, backdrop-filter 0.4s ease',
           background: scrolled ? 'rgba(5,5,7,0.85)' : 'transparent',
           backdropFilter: scrolled ? 'blur(24px) saturate(160%)' : 'none',
+          WebkitBackdropFilter: scrolled ? 'blur(24px) saturate(160%)' : 'none',
           borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         }}
       >
-        <Link to="/" className="logo" style={{ fontFamily: 'var(--font-brand)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--accent)', letterSpacing: '0.1em' }}>
+        {/* Logo */}
+        <Link to="/" style={{ fontFamily: 'var(--font-brand)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--accent)', letterSpacing: '0.1em' }}>
           Weboven
         </Link>
 
-        <div className="nav-desktop">
+        {/* Desktop links */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }} className="nav-desktop">
           {NAV_LINKS.map(l => (
             <Link
               key={l.href}
               to={l.href}
-              className={`nav-link ${location.pathname === l.href ? 'active' : ''}`}
+              style={{
+                padding: '8px 16px',
+                borderRadius: 100,
+                fontSize: '0.85rem',
+                fontWeight: 500,
+                color: location.pathname === l.href ? 'var(--accent)' : 'var(--text-2)',
+                background: location.pathname === l.href ? 'var(--accent-dim)' : 'transparent',
+                transition: 'color 0.2s, background 0.2s',
+              }}
             >
               {l.label}
             </Link>
           ))}
-          <a href="/contatto" className="btn btn-primary">Parliamoci</a>
+          <Link
+            to="/contatto"
+            className="btn btn-primary"
+            style={{ padding: '9px 22px', fontSize: '0.82rem', marginLeft: 8 }}
+          >
+            Parliamoci
+          </Link>
         </div>
 
-        <button onClick={() => setOpen(!open)} className="nav-mobile-toggle" aria-label="Menu">
-          <span className="bar" />
-          <span className="bar" />
-          <span className="bar" />
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="nav-mobile-toggle"
+          style={{
+            background: 'none', border: 'none', color: 'var(--text-1)',
+            display: 'flex', flexDirection: 'column', gap: 5, cursor: 'pointer', padding: 4,
+          }}
+          aria-label="Menu"
+        >
+          {[0,1,2].map(i => (
+            <motion.span
+              key={i}
+              animate={open
+                ? i === 1 ? { opacity: 0 } : i === 0 ? { rotate: 45, y: 9 } : { rotate: -45, y: -9 }
+                : { rotate: 0, y: 0, opacity: 1 }
+              }
+              transition={{ duration: 0.3 }}
+              style={{ display: 'block', width: 22, height: 1.5, background: 'var(--text-1)', borderRadius: 2, transformOrigin: 'center' }}
+            />
+          ))}
         </button>
-      </nav>
+      </motion.nav>
 
-      <div className={`mobile-menu ${open ? 'open' : ''}`}>
-        {NAV_LINKS.map(l => (
-          <Link key={l.href} to={l.href} className="mobile-nav-link">
-            {l.label}
-          </Link>
-        ))}
-        <a href="/contatto" className="btn btn-primary">Parliamoci</a>
-      </div>
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4, ease: [0.16,1,0.3,1] }}
+            style={{
+              position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+              background: 'rgba(5,5,7,0.97)',
+              backdropFilter: 'blur(24px)',
+              zIndex: 999, display: 'flex', flexDirection: 'column',
+              alignItems: 'center', justifyContent: 'center', gap: 16,
+            }}
+          >
+            {NAV_LINKS.map((l, i) => (
+              <motion.div
+                key={l.href}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.08 + 0.1 }}
+              >
+                <Link
+                  to={l.href}
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(2rem, 8vw, 3rem)',
+                    color: location.pathname === l.href ? 'var(--accent)' : 'var(--text-1)',
+                    fontWeight: 700,
+                  }}
+                >
+                  {l.label}
+                </Link>
+              </motion.div>
+            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.42 }}
+            >
+              <Link
+                to="/contatto"
+                className="btn btn-primary"
+                style={{ marginTop: 24, fontSize: '1rem', padding: '14px 40px', display: 'inline-flex' }}
+              >
+                Parliamoci
+              </Link>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style>{`
-        .nav-desktop {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-        .nav-link {
-          padding: 8px 16px;
-          border-radius: 100px;
-          font-size: 0.85rem;
-          font-weight: 500;
-          color: var(--text-2);
-          background: transparent;
-          transition: all 0.2s ease;
-          text-decoration: none;
-        }
-        .nav-link:hover {
-          color: var(--accent);
-          background: var(--accent-dim);
-          transform: translateY(-1px);
-        }
-        .nav-link.active {
-          color: var(--accent);
-          background: var(--accent-dim);
-        }
-        .nav-mobile-toggle {
-          display: none;
-          background: none;
-          border: none;
-          flex-direction: column;
-          gap: 5px;
-          cursor: pointer;
-          padding: 4px;
-        }
-        .nav-mobile-toggle .bar {
-          display: block;
-          width: 22px;
-          height: 1.5px;
-          background: var(--text-1);
-          border-radius: 2px;
-          transition: all 0.3s ease;
-        }
-        .mobile-menu {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(5,5,7,0.97);
-          backdrop-filter: blur(24px);
-          z-index: 999;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 32px;
-          opacity: 0;
-          visibility: hidden;
-          transition: opacity 0.4s ease, visibility 0.4s ease;
-        }
-        .mobile-menu.open {
-          opacity: 1;
-          visibility: visible;
-        }
-        .mobile-nav-link {
-          font-family: var(--font-display);
-          font-size: clamp(2rem, 8vw, 3rem);
-          color: var(--text-1);
-          font-weight: 700;
-          text-decoration: none;
-          transition: color 0.2s ease;
-        }
-        .mobile-nav-link:hover {
-          color: var(--accent);
-        }
+        .nav-mobile-toggle { display: none !important; }
         @media (max-width: 768px) {
-          .nav-desktop { display: none; }
-          .nav-mobile-toggle { display: flex; }
+          .nav-desktop { display: none !important; }
+          .nav-mobile-toggle { display: flex !important; }
         }
       `}</style>
     </>

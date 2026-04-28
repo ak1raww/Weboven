@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import ScrollReveal from '../components/ScrollReveal'
 import AmbientBg from '../components/AmbientBg'
 import {
@@ -38,15 +39,15 @@ export default function Metodo() {
       {/* Hero */}
       <section style={{ minHeight: '60vh', display: 'flex', alignItems: 'flex-end', padding: 'clamp(120px,14vw,200px) clamp(20px,5vw,80px) clamp(60px,6vw,80px)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
-          <p className="eyebrow" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ marginBottom: 20 }}>
+          <motion.p className="eyebrow" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ marginBottom: 20 }}>
             {metodoHeroContent.eyebrow}
-          </p>
-          <h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: [0.16,1,0.3,1] }} style={{ maxWidth: 760 }}>
+          </motion.p>
+          <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: [0.16,1,0.3,1] }} style={{ maxWidth: 760 }}>
             {metodoHeroContent.title}
-          </h1>
-          <p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} style={{ maxWidth: 560, marginTop: 24, fontSize: '1.05rem' }}>
+          </motion.h1>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} style={{ maxWidth: 560, marginTop: 24, fontSize: '1.05rem' }}>
             {metodoHeroContent.sub}
-          </p>
+          </motion.p>
         </div>
       </section>
 

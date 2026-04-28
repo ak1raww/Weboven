@@ -1,40 +1,26 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
-export default function ScrollReveal({ children, delay = 0, once = true, style = {} }) {
+export default function ScrollReveal({
+  children,
+  y = 40,
+  delay = 0,
+  duration = 0.8,
+  once = true,
+  style = {},
+}) {
   const ref = useRef(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          if (once && ref.current) observer.unobserve(ref.current)
-        } else if (!once) {
-          setIsVisible(false)
-        }
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -80px 0px' }
-    )
-
-    const currentRef = ref.current
-    if (currentRef) observer.observe(currentRef)
-
-    return () => {
-      if (currentRef) observer.unobserve(currentRef)
-    }
-  }, [once])
+  const inView = useInView(ref, { once, margin: '-80px 0px' })
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      className={`scroll-reveal ${isVisible ? 'in-view' : ''}`}
-      style={{
-        transitionDelay: `${delay}s`,
-        ...style,
-      }}
+      initial={{ opacity: 0, y }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration, delay, ease: [0.16, 1, 0.3, 1] }}
+      style={style}
     >
       {children}
-    </div>
+    </motion.div>
   )
 }
