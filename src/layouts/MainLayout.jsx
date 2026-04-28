@@ -52,10 +52,10 @@ export default function MainLayout({ children }) {
     backgroundImage:
       'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
     backgroundSize: '80px 80px',
-    // REMOVED maskImage here because it kills Safari performance
-    opacity: 0.4, 
-    transform: 'translate3d(0,0,0)', // Force Hardware Acceleration
-    willChange: 'transform',
+    // WE REMOVED maskImage - THIS IS THE LAG KILLER
+    opacity: 0.3, 
+    transform: 'translateZ(0)', // Hardware acceleration
+    WebkitTransform: 'translateZ(0)',
   }}
 />
 

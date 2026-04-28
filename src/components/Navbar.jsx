@@ -63,13 +63,13 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <a
-            href="/contatto"
-            className="btn btn-primary"
-            style={{ padding: '9px 22px', fontSize: '0.82rem', marginLeft: 8 }}
-          >
-            Parliamoci
-          </a>
+          <Link
+  to="/contatto"
+  className="btn btn-primary"
+  style={{ padding: '9px 22px', fontSize: '0.82rem', marginLeft: 8 }}
+>
+  Parliamoci
+</Link>
         </div>
 
         {/* Mobile hamburger */}
