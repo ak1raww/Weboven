@@ -2,15 +2,19 @@ import { useEffect } from 'react'
 
 export default function CustomCursor() {
   useEffect(() => {
-    const isTouch = window.matchMedia('(pointer: coarse)').matches
+    // Controlla sia pointer:coarse che pointer:fine per sicurezza su tutti i device
+    const isTouch = !window.matchMedia('(pointer: fine)').matches
 
     const dot = document.getElementById('custom-cursor')
     const ring = document.getElementById('cursor-follower')
     if (!dot || !ring) return
 
     if (isTouch) {
+      // Su touch: nascondi i div del cursore custom e ripristina il cursore nativo
       dot.style.display = 'none'
       ring.style.display = 'none'
+      document.documentElement.style.cursor = ''
+      document.body.style.cursor = ''
       return
     }
 

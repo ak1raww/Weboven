@@ -275,7 +275,10 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ── CURSOR ── */
-* { cursor: none; }
+/* Solo su dispositivi con mouse — su touch cursor:none può bloccare il rendering */
+@media (pointer: fine) {
+  * { cursor: none; }
+}
 
 #custom-cursor {
   position: fixed;
@@ -420,4 +423,28 @@ a { color: inherit; text-decoration: none; }
   gap: 20px;
   width: 100%;
   opacity: 0.25; /* Dark luxury fade */
+}
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+ 
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+ 
+.hero-fade-up {
+  opacity: 0;
+  animation: heroFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+ 
+.hero-delay-1 { animation-delay: 0.1s; }
+.hero-delay-2 { animation-delay: 0.3s; }
+.hero-delay-3 { animation-delay: 0.5s; }
+.hero-delay-4 { animation-delay: 1.2s; }
+ 
+.scroll-bounce {
+  animation: scrollBounce 1.6s ease-in-out infinite;
 }

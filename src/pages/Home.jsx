@@ -133,25 +133,10 @@ function Hero() {
         <div className="scroll-bounce" style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--accent), transparent)' }} />
       </div>
 
-      <style>{`
-        @keyframes heroFadeUp {
-          from { opacity: 0; transform: translateY(40px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes scrollBounce {
-          0%, 100% { transform: translateY(0); }
-          50%       { transform: translateY(8px); }
-        }
-        .hero-fade-up {
-          opacity: 0;
-          animation: heroFadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
-        }
-        .hero-delay-1 { animation-delay: 0.1s; }
-        .hero-delay-2 { animation-delay: 0.3s; }
-        .hero-delay-3 { animation-delay: 0.5s; }
-        .hero-delay-4 { animation-delay: 1.2s; }
-        .scroll-bounce { animation: scrollBounce 1.6s ease-in-out infinite; }
-      `}</style>
+      {/* Hero animation rules live in global.css — NOT here.
+          Inline <style> tags are injected by React after mount (3-4s on slow mobile),
+          so any class defined here doesn't exist until React finishes parsing.
+          Rules in global.css are parsed by the browser immediately with the stylesheet. */}
     </section>
   )
 }
