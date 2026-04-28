@@ -448,3 +448,14 @@ a { color: inherit; text-decoration: none; }
 .scroll-bounce {
   animation: scrollBounce 1.6s ease-in-out infinite;
 }
+
+@media (max-width: 768px) {
+  .noise-overlay {
+    display: none !important;
+  }
+  
+  /* Disable smooth scrolling on mobile if it feels "heavy" */
+  html {
+    scroll-behavior: auto !important;
+  }
+}

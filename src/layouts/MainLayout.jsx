@@ -43,24 +43,21 @@ export default function MainLayout({ children }) {
         onto the GPU compositing stack so it doesn't trigger repaints on scroll.
       */}
       <div
-        aria-hidden
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: 'none',
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)',
-          backgroundSize: '80px 80px',
-          maskImage:
-            'radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)',
-          WebkitMaskImage:
-            'radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)',
-          // GPU compositing hint — critical for Safari not to repaint this on every scroll frame
-          transform: 'translateZ(0)',
-          willChange: 'transform',
-        }}
-      />
+  aria-hidden
+  style={{
+    position: 'fixed',
+    inset: 0,
+    zIndex: 0,
+    pointerEvents: 'none',
+    backgroundImage:
+      'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
+    backgroundSize: '80px 80px',
+    // REMOVED maskImage here because it kills Safari performance
+    opacity: 0.4, 
+    transform: 'translate3d(0,0,0)', // Force Hardware Acceleration
+    willChange: 'transform',
+  }}
+/>
 
       <CustomCursor />
       <Navbar />
