@@ -13,38 +13,34 @@ import {
 } from '../data/home.copy'
 
 /* ── small helpers ── */
-function GlassServiceCard({ item, index }) {
+function GlassServiceCard({ item }) {
   return (
-    <ScrollReveal delay={index * 0.15} y={50}>
-      <Link to={item.href} className="glass-card" style={{ display: 'block', padding: '40px 36px', height: '100%', textDecoration: 'none' }}>
-        <span className="chip">{item.tag}</span>
-        <h3 style={{ marginTop: 20, marginBottom: 14, fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontFamily: 'var(--font-display)', fontWeight: 700 }}>
-          {item.headline}
-        </h3>
-        <p style={{ fontSize: '0.95rem', lineHeight: 1.8 }}>{item.desc}</p>
-        <div style={{ marginTop: 32, display: 'flex', alignItems: 'center', gap: 8, color: 'var(--accent)', fontSize: '0.85rem', fontWeight: 500 }}>
-          {item.cta}
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </div>
-      </Link>
-    </ScrollReveal>
+    <Link to={item.href} className="glass-card" style={{ display: 'block', padding: '40px 36px', height: '100%', textDecoration: 'none' }}>
+      <span className="chip">{item.tag}</span>
+      <h3 style={{ marginTop: 20, marginBottom: 14, fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontFamily: 'var(--font-display)', fontWeight: 700 }}>
+        {item.headline}
+      </h3>
+      <p style={{ fontSize: '0.95rem', lineHeight: 1.8 }}>{item.desc}</p>
+      <div style={{ marginTop: 32, display: 'flex', alignItems: 'center', gap: 8, color: 'var(--accent)', fontSize: '0.85rem', fontWeight: 500 }}>
+        {item.cta}
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
+    </Link>
   )
 }
 
-function NumberCard({ item, index }) {
+function NumberCard({ item }) {
   return (
-    <ScrollReveal delay={index * 0.1} y={30}>
-      <div className="glass-card" style={{ padding: '32px 28px', textAlign: 'center' }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 900, color: 'var(--accent)', lineHeight: 1 }}>
-          {item.value}
-        </div>
-        <p style={{ marginTop: 10, fontSize: '0.82rem', color: 'var(--text-2)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-          {item.label}
-        </p>
+    <div className="glass-card" style={{ padding: '32px 28px', textAlign: 'center' }}>
+      <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 900, color: 'var(--accent)', lineHeight: 1 }}>
+        {item.value}
       </div>
-    </ScrollReveal>
+      <p style={{ marginTop: 10, fontSize: '0.82rem', color: 'var(--text-2)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+        {item.label}
+      </p>
+    </div>
   )
 }
 
@@ -160,11 +156,11 @@ function Manifesto() {
           </ScrollReveal>
 
           <div style={{ paddingTop: 8 }}>
-            {manifestoContent.body.map((text, i) => (
-              <ScrollReveal key={i} delay={i * 0.15} y={30}>
-                <p style={{ fontSize: '1.05rem', marginBottom: 24, lineHeight: 1.8 }}>{text}</p>
-              </ScrollReveal>
-            ))}
+            <ScrollReveal>
+              {manifestoContent.body.map((text, i) => (
+                <p key={i} style={{ fontSize: '1.05rem', marginBottom: 24, lineHeight: 1.8 }}>{text}</p>
+              ))}
+            </ScrollReveal>
           </div>
         </div>
       </div>
@@ -186,11 +182,13 @@ function ServicesPreview() {
           <h2 style={{ marginBottom: 48, maxWidth: 500 }}>{servicesPreviewContent.title}</h2>
         </ScrollReveal>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
-          {servicesPreviewContent.items.map((item, i) => (
-            <GlassServiceCard key={item.id} item={item} index={i} />
-          ))}
-        </div>
+        <ScrollReveal>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
+            {servicesPreviewContent.items.map((item, i) => (
+              <GlassServiceCard key={item.id} item={item} />
+            ))}
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   )
@@ -211,11 +209,13 @@ function Numbers() {
         <div className="strike-zone-wrapper">
           <div className="big-x-pc" aria-hidden="true" />
 
-          <div className="grid-faded">
-            {numbersContent.items.map((item, i) => (
-              <NumberCard key={i} item={item} index={i} />
-            ))}
-          </div>
+          <ScrollReveal>
+            <div className="grid-faded">
+              {numbersContent.items.map((item, i) => (
+                <NumberCard key={i} item={item} />
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
 
         <ScrollReveal delay={0.4}>

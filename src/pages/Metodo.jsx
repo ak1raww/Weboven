@@ -9,22 +9,20 @@ import {
   metodoCtaContent,
 } from '../data/metodo.copy'
 
-function ValoreCard({ item, index }) {
+function ValoreCard({ item }) {
   return (
-    <ScrollReveal delay={index * 0.1} y={35}>
-      <div className="glass-card" style={{ padding: '32px 28px' }}>
-        <div style={{
-          width: 48, height: 48, borderRadius: 12,
-          background: 'var(--accent-dim)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '1.3rem', marginBottom: 20, color: 'var(--accent)',
-        }}>
-          {item.icon}
-        </div>
-        <h4 style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', marginBottom: 10, color: 'var(--text-1)' }}>{item.label}</h4>
-        <p style={{ fontSize: '0.92rem', lineHeight: 1.75 }}>{item.desc}</p>
+    <div className="glass-card" style={{ padding: '32px 28px' }}>
+      <div style={{
+        width: 48, height: 48, borderRadius: 12,
+        background: 'var(--accent-dim)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontSize: '1.3rem', marginBottom: 20, color: 'var(--accent)',
+      }}>
+        {item.icon}
       </div>
-    </ScrollReveal>
+      <h4 style={{ fontFamily: 'var(--font-display)', fontSize: '1.1rem', marginBottom: 10, color: 'var(--text-1)' }}>{item.label}</h4>
+      <p style={{ fontSize: '0.92rem', lineHeight: 1.75 }}>{item.desc}</p>
+    </div>
   )
 }
 
@@ -39,13 +37,13 @@ export default function Metodo() {
       {/* Hero */}
       <section style={{ minHeight: '60vh', display: 'flex', alignItems: 'flex-end', padding: 'clamp(120px,14vw,200px) clamp(20px,5vw,80px) clamp(60px,6vw,80px)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
-          <motion.p className="eyebrow" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ marginBottom: 20 }}>
+          <motion.p className="eyebrow" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} style={{ marginBottom: 20 }}>
             {metodoHeroContent.eyebrow}
           </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: [0.16,1,0.3,1] }} style={{ maxWidth: 760 }}>
+          <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.1 }} style={{ maxWidth: 760 }}>
             {metodoHeroContent.title}
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} style={{ maxWidth: 560, marginTop: 24, fontSize: '1.05rem' }}>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.2 }} style={{ maxWidth: 560, marginTop: 24, fontSize: '1.05rem' }}>
             {metodoHeroContent.sub}
           </motion.p>
         </div>
@@ -58,10 +56,10 @@ export default function Metodo() {
             <div className="section-label"><span className="eyebrow">{metodoManifestoContent.label}</span></div>
           </ScrollReveal>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginTop: 16 }}>
-            {metodoManifestoContent.blocks.map((block, i) => (
-              <ScrollReveal key={i} delay={i * 0.15} y={40}>
-                <div style={{
+          <ScrollReveal>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginTop: 16 }}>
+              {metodoManifestoContent.blocks.map((block, i) => (
+                <div key={i} style={{
                   padding: 'clamp(32px,4vw,48px) 0',
                   borderBottom: '1px solid var(--border)',
                   display: 'grid',
@@ -74,10 +72,10 @@ export default function Metodo() {
                   </h3>
                   <p style={{ fontSize: '1rem', lineHeight: 1.8, paddingTop: 4 }}>{block.body}</p>
                 </div>
-                <style>{`@media(max-width:640px){ div > div { grid-template-columns: 1fr !important; } }`}</style>
-              </ScrollReveal>
-            ))}
-          </div>
+              ))}
+              <style>{`@media(max-width:640px){ div > div { grid-template-columns: 1fr !important; } }`}</style>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -87,11 +85,13 @@ export default function Metodo() {
           <ScrollReveal>
             <div className="section-label"><span className="eyebrow">{metodoValoriContent.label}</span></div>
           </ScrollReveal>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20, marginTop: 20 }}>
-            {metodoValoriContent.items.map((item, i) => (
-              <ValoreCard key={i} item={item} index={i} />
-            ))}
-          </div>
+          <ScrollReveal>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20, marginTop: 20 }}>
+              {metodoValoriContent.items.map((item, i) => (
+                <ValoreCard key={i} item={item} />
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
