@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform } from 'framer-motion'
 import ScrollReveal from '../components/ScrollReveal'
 import AmbientBg from '../components/AmbientBg'
 import {
@@ -13,47 +12,41 @@ import {
 } from '../data/home.copy'
 
 /* ── small helpers ── */
-function GlassServiceCard({ item }) {
+function GlassServiceCard({ item, index }) {
   return (
-    <Link to={item.href} className="glass-card" style={{ display: 'block', padding: '40px 36px', height: '100%', textDecoration: 'none' }}>
-      <span className="chip">{item.tag}</span>
-      <h3 style={{ marginTop: 20, marginBottom: 14, fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontFamily: 'var(--font-display)', fontWeight: 700 }}>
-        {item.headline}
-      </h3>
-      <p style={{ fontSize: '0.95rem', lineHeight: 1.8 }}>{item.desc}</p>
-      <div style={{ marginTop: 32, display: 'flex', alignItems: 'center', gap: 8, color: 'var(--accent)', fontSize: '0.85rem', fontWeight: 500 }}>
-        {item.cta}
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </div>
-    </Link>
+    <ScrollReveal delay={index * 0.15} y={50}>
+      <Link to={item.href} className="glass-card" style={{ display: 'block', padding: '40px 36px', height: '100%', textDecoration: 'none' }}>
+        <span className="chip">{item.tag}</span>
+        <h3 style={{ marginTop: 20, marginBottom: 14, fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontFamily: 'var(--font-display)', fontWeight: 700 }}>
+          {item.headline}
+        </h3>
+        <p style={{ fontSize: '0.95rem', lineHeight: 1.8 }}>{item.desc}</p>
+        <div style={{ marginTop: 32, display: 'flex', alignItems: 'center', gap: 8, color: 'var(--accent)', fontSize: '0.85rem', fontWeight: 500 }}>
+          {item.cta}
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      </Link>
+    </ScrollReveal>
   )
 }
 
-function NumberCard({ item }) {
+function NumberCard({ item, index }) {
   return (
-    <div className="glass-card" style={{ padding: '32px 28px', textAlign: 'center' }}>
-      <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 900, color: 'var(--accent)', lineHeight: 1 }}>
-        {item.value}
+    <ScrollReveal delay={index * 0.1} y={30}>
+      <div className="glass-card" style={{ padding: '32px 28px', textAlign: 'center' }}>
+        <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 900, color: 'var(--accent)', lineHeight: 1 }}>
+          {item.value}
+        </div>
+        <p style={{ marginTop: 10, fontSize: '0.82rem', color: 'var(--text-2)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+          {item.label}
+        </p>
       </div>
-      <p style={{ marginTop: 10, fontSize: '0.82rem', color: 'var(--text-2)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-        {item.label}
-      </p>
-    </div>
+    </ScrollReveal>
   )
 }
 
-/* ── Hero with parallax ──
- * On desktop: scroll-driven parallax via framer-motion useScroll.
- * On mobile: parallax disabled entirely — imperceptible on phones and
- * expensive. All hero text uses CSS keyframe animations instead of
- * framer-motion initial/animate, so content is visible immediately
- * without waiting for the framer-motion JS bundle to finish parsing.
- * This is the root cause of "only eyebrow shows" on slow mobile —
- * the eyebrow uses a CSS class, everything else was opacity:0 waiting
- * for JS. CSS animations run as soon as the stylesheet loads.
- */
 function Hero() {
   const ref = useRef(null)
   const { scrollY } = useScroll()
@@ -73,7 +66,7 @@ function Hero() {
         overflow: 'hidden',
       }}
     >
-      <motion.div
+      <div
         style={isMobile ? {
           width: '100%',
           padding: '120px clamp(20px,5vw,80px) 80px',
@@ -113,9 +106,8 @@ function Hero() {
             {heroContent.cta.secondary.label}
           </a>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Scroll indicator — CSS animated, no framer-motion */}
       <div
         className="hero-fade-up hero-delay-4"
         style={{
@@ -129,10 +121,25 @@ function Hero() {
         <div className="scroll-bounce" style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--accent), transparent)' }} />
       </div>
 
-      {/* Hero animation rules live in global.css — NOT here.
-          Inline <style> tags are injected by React after mount (3-4s on slow mobile),
-          so any class defined here doesn't exist until React finishes parsing.
-          Rules in global.css are parsed by the browser immediately with the stylesheet. */}
+      <style>{`
+        @keyframes heroFadeUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scrollBounce {
+          0%, 100% { transform: translateY(0); }
+          50%       { transform: translateY(8px); }
+        }
+        .hero-fade-up {
+          opacity: 0;
+          animation: heroFadeUp 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+        .hero-delay-1 { animation-delay: 0.1s; }
+        .hero-delay-2 { animation-delay: 0.3s; }
+        .hero-delay-3 { animation-delay: 0.5s; }
+        .hero-delay-4 { animation-delay: 1.2s; }
+        .scroll-bounce { animation: scrollBounce 1.6s ease-in-out infinite; }
+      `}</style>
     </section>
   )
 }
@@ -156,11 +163,11 @@ function Manifesto() {
           </ScrollReveal>
 
           <div style={{ paddingTop: 8 }}>
-            <ScrollReveal>
-              {manifestoContent.body.map((text, i) => (
-                <p key={i} style={{ fontSize: '1.05rem', marginBottom: 24, lineHeight: 1.8 }}>{text}</p>
-              ))}
-            </ScrollReveal>
+            {manifestoContent.body.map((text, i) => (
+              <ScrollReveal key={i} delay={i * 0.15} y={30}>
+                <p style={{ fontSize: '1.05rem', marginBottom: 24, lineHeight: 1.8 }}>{text}</p>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </div>
@@ -182,13 +189,11 @@ function ServicesPreview() {
           <h2 style={{ marginBottom: 48, maxWidth: 500 }}>{servicesPreviewContent.title}</h2>
         </ScrollReveal>
 
-        <ScrollReveal>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
-            {servicesPreviewContent.items.map((item, i) => (
-              <GlassServiceCard key={item.id} item={item} />
-            ))}
-          </div>
-        </ScrollReveal>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 24 }}>
+          {servicesPreviewContent.items.map((item, i) => (
+            <GlassServiceCard key={item.id} item={item} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -209,13 +214,11 @@ function Numbers() {
         <div className="strike-zone-wrapper">
           <div className="big-x-pc" aria-hidden="true" />
 
-          <ScrollReveal>
-            <div className="grid-faded">
-              {numbersContent.items.map((item, i) => (
-                <NumberCard key={i} item={item} />
-              ))}
-            </div>
-          </ScrollReveal>
+          <div className="grid-faded">
+            {numbersContent.items.map((item, i) => (
+              <NumberCard key={i} item={item} index={i} />
+            ))}
+          </div>
         </div>
 
         <ScrollReveal delay={0.4}>

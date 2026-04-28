@@ -1,59 +1,24 @@
-import { useRef, useState, useEffect } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { useOnScreen } from '../hooks/useOnScreen'
 
-export default function ScrollReveal({
-  children,
-  delay = 0,
-  duration = 0.4,
-  once = true,
-  style = {},
-  className = ""
-}) {
-  const ref = useRef(null)
-  
-  // Mobile detection to eliminate heavy runtime animations on mobile
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== 'undefined' 
-      ? window.innerWidth <= 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-      : false
-  )
+export default function ScrollReveal({ children, y = 40, delay = 0, once = true, style = {} }) {
+  const [ref, isVisible] = useOnScreen({ threshold: 0.1, rootMargin: '0px 0px -80px 0px' })
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent))
-    }
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  const computedStyle = {
+    opacity: 0,
+    transform: `translateY(${y}px)`,
+    transition: `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)`,
+    transitionDelay: `${delay}s`,
+    ...style
+  }
 
-  // Avoid running useInView hook on mobile at all if possible, but hooks can't be conditional.
-  // We'll pass a dummy ref if mobile to minimize work, or just use it.
-  const inView = useInView(ref, { once, margin: '-50px 0px' })
-
-  const [startVisible, setStartVisible] = useState(false)
-  useEffect(() => {
-    if (!ref.current || isMobile) return
-    const rect = ref.current.getBoundingClientRect()
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      setStartVisible(true)
-    }
-  }, [isMobile])
-
-  // Return static children on mobile
-  if (isMobile) {
-    return <div style={style} className={className}>{children}</div>
+  if (isVisible) {
+    computedStyle.opacity = 1
+    computedStyle.transform = 'translateY(0)'
   }
 
   return (
-    <motion.div
-      ref={ref}
-      initial={startVisible ? { opacity: 1 } : { opacity: 0 }}
-      animate={inView ? { opacity: 1 } : {}}
-      transition={{ duration, delay, ease: 'easeOut' }}
-      style={style}
-      className={className}
-    >
+    <div ref={ref} style={computedStyle}>
       {children}
-    </motion.div>
+    </div>
   )
 }

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import ScrollReveal from '../components/ScrollReveal'
 import AmbientBg from '../components/AmbientBg'
 import {
@@ -9,23 +8,25 @@ import {
   socialCtaContent,
 } from '../data/social.copy'
 
-function ServiceCard({ item }) {
+function ServiceCard({ item, index }) {
   return (
-    <div className="glass-card" style={{ padding: 'clamp(28px,3.5vw,44px)' }}>
-      <span className="chip">{item.tag}</span>
-      <h3 style={{ marginTop: 18, marginBottom: 12, fontSize: 'clamp(1.3rem,2.2vw,1.75rem)', fontFamily: 'var(--font-display)', fontWeight: 700 }}>
-        {item.headline}
-      </h3>
-      <p style={{ fontSize: '0.95rem', lineHeight: 1.8 }}>{item.desc}</p>
-      <ul style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {item.details.map((d, i) => (
-          <li key={i} style={{ listStyle: 'none', display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.85rem', color: 'var(--text-2)' }}>
-            <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0, opacity: 0.7 }} />
-            {d}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ScrollReveal delay={index * 0.1} y={45}>
+      <div className="glass-card" style={{ padding: 'clamp(28px,3.5vw,44px)' }}>
+        <span className="chip">{item.tag}</span>
+        <h3 style={{ marginTop: 18, marginBottom: 12, fontSize: 'clamp(1.3rem,2.2vw,1.75rem)', fontFamily: 'var(--font-display)', fontWeight: 700 }}>
+          {item.headline}
+        </h3>
+        <p style={{ fontSize: '0.95rem', lineHeight: 1.8 }}>{item.desc}</p>
+        <ul style={{ marginTop: 24, display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {item.details.map((d, i) => (
+            <li key={i} style={{ listStyle: 'none', display: 'flex', alignItems: 'center', gap: 10, fontSize: '0.85rem', color: 'var(--text-2)' }}>
+              <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent)', flexShrink: 0, opacity: 0.7 }} />
+              {d}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </ScrollReveal>
   )
 }
 
@@ -40,15 +41,15 @@ export default function Social() {
       {/* Hero */}
       <section style={{ minHeight: '60vh', display: 'flex', alignItems: 'flex-end', padding: 'clamp(120px,14vw,200px) clamp(20px,5vw,80px) clamp(60px,6vw,80px)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
-          <motion.p className="eyebrow" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} style={{ marginBottom: 20 }}>
+          <p className="eyebrow" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ marginBottom: 20 }}>
             {socialHeroContent.eyebrow}
-          </motion.p>
-          <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.1 }} style={{ maxWidth: 820 }}>
+          </p>
+          <h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: [0.16,1,0.3,1] }} style={{ maxWidth: 820 }}>
             {socialHeroContent.title}
-          </motion.h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.2 }} style={{ maxWidth: 520, marginTop: 24, fontSize: '1.05rem' }}>
+          </h1>
+          <p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} style={{ maxWidth: 520, marginTop: 24, fontSize: '1.05rem' }}>
             {socialHeroContent.sub}
-          </motion.p>
+          </p>
         </div>
       </section>
 
@@ -58,13 +59,11 @@ export default function Social() {
           <ScrollReveal>
             <div className="section-label"><span className="eyebrow">{socialServicesContent.label}</span></div>
           </ScrollReveal>
-          <ScrollReveal>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, marginTop: 16 }}>
-              {socialServicesContent.items.map((item, i) => (
-                <ServiceCard key={i} item={item} />
-              ))}
-            </div>
-          </ScrollReveal>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, marginTop: 16 }}>
+            {socialServicesContent.items.map((item, i) => (
+              <ServiceCard key={i} item={item} index={i} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -75,11 +74,15 @@ export default function Social() {
             <div className="section-label"><span className="eyebrow">{socialPlatformsContent.label}</span></div>
             <h2 style={{ marginTop: 4, marginBottom: 40 }}>{socialPlatformsContent.title}</h2>
           </ScrollReveal>
-          <ScrollReveal>
+          <ScrollReveal y={20}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
               {socialPlatformsContent.platforms.map((p, i) => (
                 <div
                   key={p}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08, ease: [0.16,1,0.3,1], duration: 0.6 }}
                   className="glass-card"
                   style={{ padding: '14px 28px', borderRadius: 100, fontSize: '0.95rem', fontWeight: 500, color: 'var(--text-1)' }}
                 >

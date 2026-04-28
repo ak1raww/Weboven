@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import ScrollReveal from '../components/ScrollReveal'
 import AmbientBg from '../components/AmbientBg'
 import {
@@ -21,10 +20,11 @@ function Stars({ count }) {
   )
 }
 
-function TestiCard({ item }) {
+function TestiCard({ item, index }) {
   return (
-    <div className="glass-card" style={{ padding: 'clamp(28px,3vw,40px)', height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <Stars count={item.stars} />
+    <ScrollReveal delay={index * 0.1} y={40}>
+      <div className="glass-card" style={{ padding: 'clamp(28px,3vw,40px)', height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <Stars count={item.stars} />
         
         <blockquote style={{
           fontFamily: 'var(--font-body)',
@@ -75,6 +75,7 @@ function TestiCard({ item }) {
           )}
         </div>
       </div>
+    </ScrollReveal>
   )
 }
 
@@ -89,33 +90,31 @@ export default function Testimonianze() {
       {/* Hero */}
       <section style={{ minHeight: '50vh', display: 'flex', alignItems: 'flex-end', padding: 'clamp(120px,14vw,200px) clamp(20px,5vw,80px) clamp(60px,6vw,80px)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', width: '100%' }}>
-          <motion.p className="eyebrow" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} style={{ marginBottom: 20 }}>
+          <p className="eyebrow" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ marginBottom: 20 }}>
             {testiHeroContent.eyebrow}
-          </motion.p>
-          <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.1 }} style={{ maxWidth: 720 }}>
+          </p>
+          <h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: [0.16,1,0.3,1] }} style={{ maxWidth: 720 }}>
             {testiHeroContent.title}
-          </motion.h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.2 }} style={{ maxWidth: 460, marginTop: 24, fontSize: '1.05rem' }}>
+          </h1>
+          <p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} style={{ maxWidth: 460, marginTop: 24, fontSize: '1.05rem' }}>
             {testiHeroContent.sub}
-          </motion.p>
+          </p>
         </div>
       </section>
 
       {/* Testimonials grid */}
       <section style={{ padding: '0 clamp(20px,5vw,80px) clamp(80px,10vw,120px)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-          <ScrollReveal>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-              gap: 24,
-              alignItems: 'start',
-            }}>
-              {testiContent.map((item) => (
-                <TestiCard key={item.id} item={item} />
-              ))}
-            </div>
-          </ScrollReveal>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+            gap: 24,
+            alignItems: 'start',
+          }}>
+            {testiContent.map((item, i) => (
+              <TestiCard key={item.id} item={item} index={i} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -142,7 +141,13 @@ export default function Testimonianze() {
               "{testiHighlight.quote}"
             </h2>
             
-            <p className="eyebrow" style={{ fontSize: '0.65rem', opacity: 0.6 }}>
+            <p 
+              className="eyebrow" 
+              initial={{ opacity: 0 }} 
+              whileInView={{ opacity: 0.6 }} 
+              viewport={{ once: true }}
+              style={{ fontSize: '0.65rem' }}
+            >
               La mia filosofia.
             </p>
           </ScrollReveal>
