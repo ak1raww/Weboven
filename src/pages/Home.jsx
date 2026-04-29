@@ -128,18 +128,27 @@ function Hero() {
       </motion.div>
 
       {/* Scroll indicator — CSS animated, no framer-motion */}
-      <div
-        className="hero-fade-up hero-delay-4"
-        style={{
-          position: 'absolute', bottom: 40, left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
-          pointerEvents: 'none',
-        }}
-      >
-        <p style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-3)' }}>Scorri</p>
-        <div className="scroll-bounce" style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--accent), transparent)' }} />
-      </div>
+<div
+  className="hero-fade-up hero-delay-4"
+  style={{
+    position: 'absolute',
+    bottom: 40,
+    left: 0,
+    right: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    pointerEvents: 'none',
+    width: '100%',
+  }}
+>
+  <p style={{ fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-3)' }}>
+    Scorri
+  </p>
+  <div className="scroll-bounce" style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--accent), transparent)' }} />
+</div>
 
       <style>{`
         @keyframes heroFadeUp {
