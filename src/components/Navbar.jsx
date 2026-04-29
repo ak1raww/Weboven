@@ -1,26 +1,66 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const NAV_LINKS = [
+const NAV_LINKS_MOBILE = [
+  { label: 'Home', href: '/' },
   { label: 'Web', href: '/web' },
   { label: 'Social', href: '/social' },
   { label: 'Metodo', href: '/metodo' },
   { label: 'Testimonianze', href: '/testimonianze' },
 ]
 
+const NAV_LINKS_DESKTOP = [
+  { label: 'Web', href: '/web' },
+  { label: 'Social', href: '/social' },
+  { label: 'Metodo', href: '/metodo' },
+  { label: 'Testimonianze', href: '/testimonianze' },
+]
+// Detect touch once — non cambia durante la sessione
+const isTouch =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(pointer: coarse)').matches
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const location = useLocation()
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+  // Throttle scroll handler: su iOS ogni evento di scroll
+  // è costoso. Usiamo requestAnimationFrame per limitare i check.
+  const handleScroll = useCallback(() => {
+    setScrolled(window.scrollY > 40)
   }, [])
 
+  useEffect(() => {
+    let ticking = false
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [handleScroll])
+
   useEffect(() => { setOpen(false) }, [location])
+
+  // Su iOS non usiamo backdrop-filter sulla navbar perché è
+  // position:fixed — combinazione letale per il rendering.
+  // Usiamo invece un background opaco che si attiva allo scroll.
+  const navBackground = scrolled
+    ? isTouch
+      ? 'rgba(5,5,7,0.97)'           // iOS: opaco, nessun blur
+      : 'rgba(5,5,7,0.85)'           // Desktop: semi-trasparente con blur
+    : 'transparent'
+
+  const navBackdrop = scrolled && !isTouch
+    ? 'blur(24px) saturate(160%)'
+    : 'none'
 
   return (
     <>
@@ -31,12 +71,16 @@ export default function Navbar() {
         style={{
           position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
           padding: scrolled ? '14px 32px' : '24px 32px',
-          transition: 'padding 0.4s ease, background 0.4s ease, backdrop-filter 0.4s ease',
-          background: scrolled ? 'rgba(5,5,7,0.85)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(24px) saturate(160%)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(24px) saturate(160%)' : 'none',
+          transition: 'padding 0.4s ease, background 0.4s ease',
+          background: navBackground,
+          backdropFilter: navBackdrop,
+          WebkitBackdropFilter: navBackdrop,
           borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          // Promuovi la navbar sul suo layer GPU — evita che ogni
+          // scroll triggeri un repaint della pagina sottostante
+          willChange: 'transform',
+          transform: 'translateZ(0)',
         }}
       >
         {/* Logo */}
@@ -46,7 +90,7 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }} className="nav-desktop">
-          {NAV_LINKS.map(l => (
+          {NAV_LINKS_DESKTOP.map(l => (
             <Link
               key={l.href}
               to={l.href}
@@ -63,13 +107,13 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <a
-            href="/contatto"
+          <Link
+            to="/contatto"
             className="btn btn-primary"
             style={{ padding: '9px 22px', fontSize: '0.82rem', marginLeft: 8 }}
           >
             Parliamoci
-          </a>
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -82,7 +126,7 @@ export default function Navbar() {
           }}
           aria-label="Menu"
         >
-          {[0,1,2].map(i => (
+          {[0, 1, 2].map(i => (
             <motion.span
               key={i}
               animate={open
@@ -103,16 +147,18 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: [0.16,1,0.3,1] }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-              background: 'rgba(5,5,7,0.97)',
-              backdropFilter: 'blur(24px)',
+              // Su iOS: niente backdrop-filter sul menu fullscreen
+              background: 'rgba(5,5,7,0.98)',
               zIndex: 999, display: 'flex', flexDirection: 'column',
               alignItems: 'center', justifyContent: 'center', gap: 16,
+              // Previeni lo scroll della pagina mentre il menu è aperto
+              overscrollBehavior: 'contain',
             }}
           >
-            {NAV_LINKS.map((l, i) => (
+            {NAV_LINKS_MOBILE.map((l, i) => (
               <motion.div
                 key={l.href}
                 initial={{ opacity: 0, y: 20 }}
@@ -132,16 +178,19 @@ export default function Navbar() {
                 </Link>
               </motion.div>
             ))}
-            <motion.a
-              href="/contatto"
-              className="btn btn-primary"
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.42 }}
-              style={{ marginTop: 24, fontSize: '1rem', padding: '14px 40px' }}
             >
-              Parliamoci
-            </motion.a>
+              <Link
+                to="/contatto"
+                className="btn btn-primary"
+                style={{ marginTop: 24, fontSize: '1rem', padding: '14px 40px' }}
+              >
+                Parliamoci
+              </Link>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -5,7 +5,7 @@
 export const socialHeroContent = {
   eyebrow: "social media",
   title: "I social non servono a fare like. Servono a fare clienti.",
-  sub: "La maggior parte delle aziende usa i social per fare PR con se stesse. Noi li usiamo come canale di acquisizione reale.",
+  sub: "La maggior parte delle aziende usa i social per alzare il proprio ego. Noi li useremo come canale di acquisizione reale.",
 };
 
 export const socialServicesContent = {

@@ -74,7 +74,7 @@ export default function Web() {
           <motion.p className="eyebrow" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} style={{ marginBottom: 20 }}>
             {webHeroContent.eyebrow}
           </motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: [0.16,1,0.3,1] }} style={{ maxWidth: 800 }}>
+          <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }} style={{ maxWidth: 800 }}>
             {webHeroContent.title}
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} style={{ maxWidth: 540, marginTop: 24, fontSize: '1.05rem' }}>
@@ -117,7 +117,7 @@ export default function Web() {
       <section style={{ padding: '0 clamp(20px,5vw,80px) clamp(80px,10vw,120px)' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <ScrollReveal>
-            <div className="glass-card" style={{ padding: 'clamp(40px,5vw,64px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 32 }}>
+            <div className="glass-card cta-card" style={{ padding: 'clamp(40px,5vw,64px)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 32 }}>
               <h3 style={{ fontSize: 'clamp(1.4rem,2.5vw,2rem)', fontFamily: 'var(--font-display)', fontWeight: 700, maxWidth: 480 }}>
                 {webCtaContent.title}
               </h3>

@@ -18,7 +18,7 @@ export const manifestoContent = {
   title: "Il web è cambiato. Il tuo modo no.",
   body: [
     "Ogni progetto che porto avanti nasce da una domanda semplice: Cosa manca davvero al tuo business? Non mi interessa fare siti. Mi interessa costruire quello che ti serve davvero.",
-    "Ho passato anni a capire come funziona la mente di chi naviga. Come decide. Come si ferma. Come clicca. Quel processo — da straniero a cliente — è la cosa che vivo ogni giorno.",
+    "Se hai un attività e non sei online, stai solo perdendo possibili clienti, giorno dopo giorno.",
   ],
 };
 
@@ -30,15 +30,15 @@ export const servicesPreviewContent = {
       id: "web",
       tag: "01 — Web & E-Commerce",
       headline: "Siti, il necessario.",
-      desc: "Dal sito vetrina all'e-commerce strutturato. Ogni pixel pensato per convertire, non per impressionare la giuria di un premio di design.",
+      desc: "Siti vetrina, e-commerce e web app. Niente template presi e buttati su in fretta. Ti ascolto, capisco il tuo business e costruisco uno strumento fatto per portarti clienti.",
       cta: "Esplora i servizi web",
       href: "/web",
     },
     {
       id: "social",
       tag: "02 — Social Media",
-      headline: "Presenza che converte.",
-      desc: "Gestione, strategia e contenuti. Costruiamo un ecosistema digitale coerente che porta traffico reale verso il tuo business.",
+      headline: "Social si, ma con la testa.",
+      desc: "Niente post a caso per riempire il feed. Pianifichiamo contenuti che parlano alla tua gente e trasformiamo i profili in canali che portano traffico verso il tuo business.",
       cta: "Esplora i servizi social",
       href: "/social",
     },
@@ -66,6 +66,7 @@ export const contactContent = {
   title: "Hai un progetto in testa?",
   sub: "Raccontamelo. Anche se è ancora nebuloso. Spesso è da lì che nascono le idee migliori.",
   cta: "Scrivimi su WhatsApp",
-  whatsapp: "https://wa.me/393388666909",
+  whatsapp:
+    "https://wa.me/393388666909?text=Ciao,%20sono%20qui%20dal%20tuo%20sito!",
   email: "contact@weboven.it",
 };

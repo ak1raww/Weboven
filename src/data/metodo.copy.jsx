@@ -22,7 +22,7 @@ export const metodoManifestoContent = {
       body: "Quando mi ingaggi, parli con me. Non con un account manager che poi passa il messaggio a qualcun altro. Io gestisco il progetto, io rispondo, io sono responsabile del risultato.",
     },
     {
-      title: "Risultati, non deliverable.",
+      title: "Risultati, se rispettati.",
       body: "Non ti consegno un sito. Ti consegno uno strumento di business. La differenza? Uno è un file su un server. L'altro è qualcosa che porta clienti.",
     },
   ],

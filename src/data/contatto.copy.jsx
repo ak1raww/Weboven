@@ -5,7 +5,7 @@
 export const contattoHeroContent = {
   eyebrow: "contatto",
   title: "Parliamoci.",
-  sub: "Raccontami il tuo progetto. Anche se è ancora un'idea vaga, spesso è da lì che nascono le cose migliori.",
+  sub: "Raccontami il tuo progetto. Anche se è ancora un'idea vaga e poco chiara, nessuno ha mai le idee chiare e precise.",
 };
 
 export const contattoCanaliContent = {
@@ -16,7 +16,7 @@ export const contattoCanaliContent = {
       tag: "WhatsApp",
       desc: "Il modo più diretto. Rispondo praticamente subito.",
       cta: "Scrivimi su WhatsApp",
-      href: "https://wa.me/393388666909",
+      href: "https://wa.me/393388666909?text=Ciao,%20sono%20qui%20dal%20tuo%20sito!",
       primary: true,
     },
     {

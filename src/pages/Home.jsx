@@ -12,6 +12,12 @@ import {
   contactContent,
 } from '../data/home.copy'
 
+/* ── Detect touch once at module level ──
+   Evita window.matchMedia() ad ogni render */
+const isTouch =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(pointer: coarse)').matches
+
 /* ── small helpers ── */
 function GlassServiceCard({ item, index }) {
   return (
@@ -48,23 +54,21 @@ function NumberCard({ item, index }) {
   )
 }
 
-/* ── Hero with parallax ──
- * On desktop: scroll-driven parallax via framer-motion useScroll.
- * On mobile: parallax disabled entirely — imperceptible on phones and
- * expensive. All hero text uses CSS keyframe animations instead of
- * framer-motion initial/animate, so content is visible immediately
- * without waiting for the framer-motion JS bundle to finish parsing.
- * This is the root cause of "only eyebrow shows" on slow mobile —
- * the eyebrow uses a CSS class, everything else was opacity:0 waiting
- * for JS. CSS animations run as soon as the stylesheet loads.
+/* ── Hero ──
+ * Su iOS:
+ *  - Niente useScroll/useTransform (anche se isMobile lo salta,
+ *    il hook si inizializza comunque e crea un listener).
+ *  - Niente parallax del motion.div.
+ *  - Tutto via CSS animation (già fa così il branch mobile).
  */
 function Hero() {
   const ref = useRef(null)
-  const { scrollY } = useScroll()
-  const y = useTransform(scrollY, [0, 600], [0, 120])
-  const opacity = useTransform(scrollY, [0, 420], [1, 0])
 
-  const isMobile = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
+  // Inizializziamo i hook sempre (regola dei hook),
+  // ma usiamo i valori solo su desktop
+  const { scrollY } = useScroll()
+  const yParallax = useTransform(scrollY, [0, 600], [0, 120])
+  const opacityParallax = useTransform(scrollY, [0, 420], [1, 0])
 
   return (
     <section
@@ -78,12 +82,14 @@ function Hero() {
       }}
     >
       <motion.div
-        style={isMobile ? {
+        style={isTouch ? {
+          // Touch/iOS: niente parallax, niente will-change,
+          // niente transform legato allo scroll
           width: '100%',
           padding: '120px clamp(20px,5vw,80px) 80px',
         } : {
-          y,
-          opacity,
+          y: yParallax,
+          opacity: opacityParallax,
           width: '100%',
           padding: '120px clamp(20px,5vw,80px) 80px',
           willChange: 'transform, opacity',
@@ -93,6 +99,8 @@ function Hero() {
           {heroContent.eyebrow}
         </p>
 
+        {/* Su iOS text-shimmer ha animation:none via CSS media query —
+            il gradiente statico è visivamente equivalente e non consuma GPU */}
         <h1 className="hero-fade-up hero-delay-1" style={{ maxWidth: 900 }}>
           <span className="text-shimmer">{heroContent.name}</span>
           <br />
@@ -236,7 +244,7 @@ function Numbers() {
         <ScrollReveal delay={0.4}>
           <div className="commitment-manifesto" style={{ textAlign: 'center', marginTop: '80px' }}>
             <p style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', color: 'var(--text-1)' }}>
-              Non ti darò "numeri".
+              Niente "numeri".
             </p>
             <p style={{ fontSize: 'clamp(1.2rem, 3vw, 1.8rem)', color: 'var(--text-1)' }}>
               Non mi servono i numeri per far crescere la tua attività.

@@ -1,3 +1,15 @@
+/**
+ * AmbientBg — background orbs decorativi
+ *
+ * FIX iOS: la versione originale usava position:fixed nel CSS
+ * (.ambient), che su iOS Safari forza il browser a ricomporre
+ * l'intera pagina ad ogni frame di scroll. Ora è position:absolute
+ * (vedi global.css). Questo componente rimane identico; il fix
+ * è nel CSS .ambient class.
+ *
+ * Se hai bisogno di orb veramente fissi usa sparingly e solo
+ * su desktop con una media query (pointer:fine).
+ */
 export default function AmbientBg({ orbs = [] }) {
   const defaultOrbs = [
     { width: 700, height: 700, top: '-20%', left: '-15%', color: 'rgba(232,213,176,0.06)' },
