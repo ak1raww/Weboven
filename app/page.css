@@ -15,14 +15,14 @@
 /* Glass Card Bento Style */
 .bentoGrid {
   display: grid;
-  gap: 24px;
+  gap: clamp(16px, 2.67vh, 32px);
 }
 
 .bentoCard {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px);
-  border-radius: 20px;
+  backdrop-filter: blur(0.89vh);
+  border-radius: clamp(12px, 2.22vh, 24px);
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -30,15 +30,15 @@
 .bentoCard:hover {
   background: rgba(255, 255, 255, 0.04);
   border-color: rgba(232, 213, 176, 0.25);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-  transform: translateY(-4px);
+  box-shadow: 0 1.67vh 4.44vh rgba(0, 0, 0, 0.6);
+  transform: translateY(-0.44vh);
 }
 
 /* Demo Hub Animated Callout Section */
 .demoHubSection {
   position: relative;
   overflow: hidden;
-  border-radius: 24px;
+  border-radius: clamp(16px, 2.67vh, 32px);
   background: linear-gradient(180deg, rgba(232, 213, 176, 0.02) 0%, rgba(10, 10, 10, 0) 100%);
   border: 1px solid rgba(255, 255, 255, 0.04);
 }
@@ -49,10 +49,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 16px 36px;
+  gap: clamp(6px, 1.11vh, 16px);
+  padding: clamp(10px, 1.78vh, 20px) clamp(24px, 4vh, 48px);
   font-family: var(--font-display), sans-serif;
-  font-size: 14px;
+  font-size: clamp(12px, 1.56vh, 16px);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -64,7 +64,7 @@
   z-index: 1;
   transition: all 0.3s ease;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(232, 213, 176, 0.2);
+  box-shadow: 0 0.44vh 1.78vh rgba(232, 213, 176, 0.2);
 }
 
 /* Subtle shimmer on hover only */
@@ -98,8 +98,8 @@
 }
 
 .pulsatingButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(232, 213, 176, 0.3);
+  transform: translateY(-0.22vh);
+  box-shadow: 0 0.89vh 2.67vh rgba(232, 213, 176, 0.3);
   background-color: #D4AF37;
 }
 
@@ -109,7 +109,7 @@
 
 .pulsatingButton:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(232, 213, 176, 0.15);
+  box-shadow: 0 0.22vh 0.89vh rgba(232, 213, 176, 0.15);
 }
 
 @keyframes minimalShimmer {
@@ -132,7 +132,7 @@
   top: 50%;
   left: 50%;
   width: 120%;
-  height: 1px;
+  height: 0.11vh;
   background-color: rgba(232, 213, 176, 0.05);
   z-index: 0;
   pointer-events: none;
@@ -150,15 +150,15 @@
 .statCard {
   background-color: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(232, 213, 176, 0.05);
-  border-radius: 16px;
-  padding: 32px;
+  border-radius: clamp(12px, 1.78vh, 20px);
+  padding: clamp(16px, 3.56vh, 48px);
   position: relative;
   z-index: 10;
   transition: all 0.3s ease;
 }
 
 .statCard:hover {
-  transform: translateY(-2px);
+  transform: translateY(-0.22vh);
   border-color: rgba(232, 213, 176, 0.2);
   background-color: rgba(255, 255, 255, 0.04);
 }

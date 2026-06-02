@@ -3,14 +3,14 @@
 .starIcon {
   color: #E8D5B0;
   fill: #E8D5B0;
-  width: 14px;
-  height: 14px;
+  width: clamp(10px, 1.56vh, 18px);
+  height: clamp(10px, 1.56vh, 18px);
 }
 
 .masonryGrid {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: 24px;
+  gap: clamp(16px, 2.67vh, 32px);
 }
 
 @media (min-width: 768px) {
@@ -28,17 +28,17 @@
 .reviewCard {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(2.67vh) saturate(160%);
+  -webkit-backdrop-filter: blur(2.67vh) saturate(160%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 20px 60px rgba(0, 0, 0, 0.4);
-  border-radius: 24px;
-  padding: 28px;
+    inset 0 0.11vh 0 rgba(255, 255, 255, 0.06),
+    0 2.22vh 6.67vh rgba(0, 0, 0, 0.4);
+  border-radius: clamp(16px, 2.67vh, 32px);
+  padding: clamp(16px, 3.11vh, 40px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 20px;
+  gap: clamp(12px, 2.22vh, 28px);
   overflow: hidden;
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -46,8 +46,8 @@
 .reviewCard:hover {
   border-color: rgba(255, 255, 255, 0.15);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    0 30px 80px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(232, 213, 176, 0.08);
-  transform: translateY(-4px);
+    inset 0 0.11vh 0 rgba(255, 255, 255, 0.10),
+    0 3.33vh 8.89vh rgba(0, 0, 0, 0.5),
+    0 0 0 0.11vh rgba(232, 213, 176, 0.08);
+  transform: translateY(-0.44vh);
 }

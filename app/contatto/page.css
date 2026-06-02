@@ -4,12 +4,12 @@
 .glass-panel {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(2.67vh) saturate(160%);
+  -webkit-backdrop-filter: blur(2.67vh) saturate(160%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 20px 60px rgba(0, 0, 0, 0.4);
-  border-radius: 24px;
+    inset 0 0.11vh 0 rgba(255, 255, 255, 0.06),
+    0 2.22vh 6.67vh rgba(0, 0, 0, 0.4);
+  border-radius: clamp(16px, 2.67vh, 32px);
   overflow: hidden;
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -17,20 +17,20 @@
 .glass-panel:hover {
   border-color: rgba(255, 255, 255, 0.15);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    0 30px 80px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(232, 213, 176, 0.08);
-  transform: translateY(-4px);
+    inset 0 0.11vh 0 rgba(255, 255, 255, 0.10),
+    0 3.33vh 8.89vh rgba(0, 0, 0, 0.5),
+    0 0 0 0.11vh rgba(232, 213, 176, 0.08);
+  transform: translateY(-0.44vh);
 }
 
 .formInput {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.015);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: clamp(8px, 1.33vh, 16px);
+  padding: clamp(10px, 1.78vh, 24px);
   color: #F5F5F5;
-  font-size: 14px;
+  font-size: clamp(12px, 1.56vh, 16px);
   outline: none;
   transition: all 0.3s ease;
 }
@@ -38,24 +38,24 @@
 .formInput:focus {
   background-color: rgba(255, 255, 255, 0.03);
   border-color: #E8D5B0;
-  box-shadow: 0 0 15px rgba(232, 213, 176, 0.15);
+  box-shadow: 0 0 1.67vh rgba(232, 213, 176, 0.15);
 }
 
 .formLabel {
-  font-size: 12px;
+  font-size: clamp(10px, 1.33vh, 14px);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 600;
   color: #A0A0A0;
-  margin-bottom: 8px;
+  margin-bottom: clamp(4px, 0.89vh, 12px);
   display: block;
 }
 
 .successMessage {
   background-color: rgba(16, 185, 129, 0.05);
   border: 1px solid rgba(16, 185, 129, 0.2);
-  border-radius: 16px;
-  padding: 32px;
+  border-radius: clamp(12px, 1.78vh, 20px);
+  padding: clamp(16px, 3.56vh, 48px);
   text-align: center;
   color: #F5F5F5;
   animation: fadeIn 0.4s ease-out;
@@ -64,7 +64,7 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(1.11vh);
   }
 
   to {
@@ -79,10 +79,10 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 18px 24px;
+  padding: clamp(12px, 2vh, 24px) clamp(16px, 2.67vh, 32px);
   background-color: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
+  border-radius: clamp(8px, 1.33vh, 16px);
   text-align: left;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -115,13 +115,13 @@
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   background-color: rgba(255, 255, 255, 0.01);
   border-left: 2px solid #E8D5B0;
-  border-radius: 0 0 12px 12px;
+  border-radius: 0 0 clamp(8px, 1.33vh, 16px) clamp(8px, 1.33vh, 16px);
 }
 
 .faqAnswerOpen {
-  max-height: 250px;
-  padding: 16px 24px;
-  margin-top: -4px;
+  max-height: 27.78vh;
+  padding: clamp(12px, 1.78vh, 24px) clamp(16px, 2.67vh, 32px);
+  margin-top: -0.44vh;
   border: 1px solid rgba(251, 251, 251, 0.04);
   border-left: 2px solid #E8D5B0;
 }

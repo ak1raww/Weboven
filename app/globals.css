@@ -105,18 +105,18 @@ h4 {
 /* Custom premium class shortcuts */
 .glass-panel {
   background-color: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(1.33vh);
+  -webkit-backdrop-filter: blur(1.33vh);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
+  border-radius: clamp(12px, 1.78vh, 24px);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-panel-hover:hover {
   background-color: rgba(255, 255, 255, 0.06);
   border-color: rgba(232, 213, 176, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transform: translateY(-0.22vh);
+  box-shadow: 0 1.11vh 3.33vh rgba(0, 0, 0, 0.5);
 }
 
 .text-gold-gradient {
@@ -168,7 +168,7 @@ h4 {
 
 /* Scrollbar customization */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 0.89vh;
 }
 
 ::-webkit-scrollbar-track {
@@ -177,7 +177,7 @@ h4 {
 
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  border-radius: 0.44vh;
 }
 
 ::-webkit-scrollbar-thumb:hover {

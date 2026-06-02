@@ -2,8 +2,8 @@
 
 /* Custom Cursor Styles */
 .customCursorDot {
-  width: 8px;
-  height: 8px;
+  width: clamp(6px, 0.89vh, 12px);
+  height: clamp(6px, 0.89vh, 12px);
   background-color: #E8D5B0;
   border-radius: 50%;
   position: fixed;
@@ -14,9 +14,9 @@
 }
 
 .customCursorRing {
-  width: 40px;
-  height: 40px;
-  border: 1.5px solid rgba(232, 213, 176, 0.45);
+  width: clamp(30px, 4.44vh, 60px);
+  height: clamp(30px, 4.44vh, 60px);
+  border: clamp(1px, 0.17vh, 3px) solid rgba(232, 213, 176, 0.45);
   border-radius: 50%;
   position: fixed;
   transform: translate(-50%, -50%);
@@ -30,14 +30,14 @@
 
 /* Hover state styling on clickable items */
 .cursorHoverActive .customCursorDot {
-  width: 4px;
-  height: 4px;
+  width: clamp(3px, 0.44vh, 8px);
+  height: clamp(3px, 0.44vh, 8px);
   background-color: #0A0A0A;
 }
 
 .cursorHoverActive .customCursorRing {
-  width: 56px;
-  height: 56px;
+  width: clamp(40px, 6.22vh, 80px);
+  height: clamp(40px, 6.22vh, 80px);
   background-color: rgba(232, 213, 176, 0.15);
   border-color: #E8D5B0;
   border-width: 1px;
@@ -47,6 +47,18 @@
 .custom-cursor-active,
 .custom-cursor-active * {
   cursor: none !important;
+}
+
+/* Hide custom cursor completely on devices without hover capability (mobile/tablets) */
+@media (hover: none) {
+  .customCursorDot,
+  .customCursorRing {
+    display: none !important;
+  }
+  .custom-cursor-active,
+  .custom-cursor-active * {
+    cursor: auto !important;
+  }
 }
 
 /* Clean Premium Dark Grid Background with central light radial vignette */
@@ -60,10 +72,10 @@
   pointer-events: none;
   background-color: #0A0A0A;
   background-image: 
-    radial-gradient(rgba(232, 213, 176, 0.018) 1.2px, transparent 1.2px),
-    radial-gradient(rgba(255, 255, 255, 0.007) 1.5px, transparent 1.5px);
-  background-size: 32px 32px;
-  background-position: 0 0, 16px 16px;
+    radial-gradient(rgba(232, 213, 176, 0.018) clamp(1px, 0.13vh, 3px), transparent clamp(1px, 0.13vh, 3px)),
+    radial-gradient(rgba(255, 255, 255, 0.007) clamp(1.2px, 0.17vh, 4px), transparent clamp(1.2px, 0.17vh, 4px));
+  background-size: clamp(24px, 3.56vh, 48px) clamp(24px, 3.56vh, 48px);
+  background-position: 0 0, clamp(12px, 1.78vh, 24px) clamp(12px, 1.78vh, 24px);
 }
 
 .cleanGridBackground::after {

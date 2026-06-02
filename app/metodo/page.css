@@ -8,30 +8,30 @@
 
 .timeline-item {
   display: flex;
-  gap: 1rem;
+  gap: clamp(12px, 1.78vh, 24px);
   align-items: flex-start;
   position: relative;
   overflow: visible;
 }
 
 .timeline-icon {
-  width: 56px;
-  height: 56px;
+  width: clamp(40px, 6.22vh, 64px);
+  height: clamp(40px, 6.22vh, 64px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .timeline-icon .icon-inner {
-  width: 48px;
-  height: 48px;
+  width: clamp(32px, 5.33vh, 52px);
+  height: clamp(32px, 5.33vh, 52px);
   border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(180deg, rgba(232, 213, 176, 0.14), rgba(255, 255, 255, 0.02));
   border: 1px solid rgba(232, 213, 176, 0.12);
-  box-shadow: 0 4px 14px rgba(14, 14, 14, 0.45), 0 0 18px rgba(232, 213, 176, 0.06);
+  box-shadow: 0 0.44vh 1.56vh rgba(14, 14, 14, 0.45), 0 0 2vh rgba(232, 213, 176, 0.06);
   color: #E8D5B0;
 }
 
@@ -43,12 +43,12 @@
 .glass-panel {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(2.67vh) saturate(160%);
+  -webkit-backdrop-filter: blur(2.67vh) saturate(160%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 20px 60px rgba(0, 0, 0, 0.4);
-  border-radius: 24px;
+    inset 0 0.11vh 0 rgba(255, 255, 255, 0.06),
+    0 2.22vh 6.67vh rgba(0, 0, 0, 0.4);
+  border-radius: clamp(16px, 2.67vh, 32px);
   overflow: hidden;
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -56,24 +56,24 @@
 .glass-panel:hover {
   border-color: rgba(255, 255, 255, 0.15);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    0 30px 80px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(232, 213, 176, 0.08);
-  transform: translateY(-4px);
+    inset 0 0.11vh 0 rgba(255, 255, 255, 0.10),
+    0 3.33vh 8.89vh rgba(0, 0, 0, 0.5),
+    0 0 0 0.11vh rgba(232, 213, 176, 0.08);
+  transform: translateY(-0.44vh);
 }
 
 @media (max-width: 768px) {
   .timeline-item {
-    gap: 0.75rem;
+    gap: clamp(8px, 1.33vh, 16px);
   }
 
   .timeline-icon {
-    width: 44px;
-    height: 44px;
+    width: clamp(36px, 4.89vh, 48px);
+    height: clamp(36px, 4.89vh, 48px);
   }
 
   .timeline-icon .icon-inner {
-    width: 36px;
-    height: 36px;
+    width: clamp(28px, 4vh, 40px);
+    height: clamp(28px, 4vh, 40px);
   }
 }

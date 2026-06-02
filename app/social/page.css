@@ -4,12 +4,12 @@
 .glass-panel {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(2.67vh) saturate(160%);
+  -webkit-backdrop-filter: blur(2.67vh) saturate(160%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 20px 60px rgba(0, 0, 0, 0.4);
-  border-radius: 24px;
+    inset 0 0.11vh 0 rgba(255, 255, 255, 0.06),
+    0 2.22vh 6.67vh rgba(0, 0, 0, 0.4);
+  border-radius: clamp(16px, 2.67vh, 32px);
   overflow: hidden;
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -17,45 +17,45 @@
 .glass-panel:hover {
   border-color: rgba(255, 255, 255, 0.15);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
-    0 30px 80px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(232, 213, 176, 0.08);
-  transform: translateY(-4px);
+    inset 0 0.11vh 0 rgba(255, 255, 255, 0.10),
+    0 3.33vh 8.89vh rgba(0, 0, 0, 0.5),
+    0 0 0 0.11vh rgba(232, 213, 176, 0.08);
+  transform: translateY(-0.44vh);
 }
 
 .badgeContainer {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: clamp(4px, 0.89vh, 12px);
   background-color: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 999px;
-  padding: 8px 16px;
+  padding: clamp(6px, 0.89vh, 12px) clamp(10px, 1.78vh, 24px);
   transition: all 0.3s ease;
 }
 
 .badgeContainer:hover {
   background-color: rgba(232, 213, 176, 0.08);
   border-color: rgba(232, 213, 176, 0.25);
-  transform: translateY(-1px);
+  transform: translateY(-0.11vh);
 }
 
 .platformIcon {
-  width: 16px;
-  height: 16px;
+  width: clamp(12px, 1.78vh, 20px);
+  height: clamp(12px, 1.78vh, 20px);
   color: #E8D5B0;
 }
 
 /* Service mini card list styling */
 .detailItem {
-  font-size: 11px;
+  font-size: clamp(9px, 1.22vh, 13px);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 700;
   color: #E8D5B0;
   background-color: rgba(232, 213, 176, 0.05);
   border: 1px solid rgba(232, 213, 176, 0.15);
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 0.44vh 1.11vh;
+  border-radius: clamp(4px, 0.67vh, 10px);
   width: fit-content;
 }

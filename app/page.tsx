@@ -40,7 +40,7 @@ export default function Home() {
       <JsonLd data={[organizationJsonLd(), websiteJsonLd(), webPageJsonLd(pageSeo.home)]} />
       
       {/* 1. Hero Section */}
-      <section className="pt-8 text-center max-w-3xl mx-auto space-y-6" id="hero-section">
+      <section className="pt-8 px-6 text-center max-w-3xl mx-auto space-y-6" id="hero-section">
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight font-display text-white leading-tight">
           Weboven,
         </h1>

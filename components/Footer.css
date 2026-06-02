@@ -6,11 +6,11 @@
 
 .footerGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(160px, 0.8fr) minmax(220px, 1fr);
-  gap: 48px;
+  grid-template-columns: minmax(0, 1.4fr) minmax(clamp(120px, 17.78vh, 160px), 0.8fr) minmax(clamp(160px, 24.44vh, 220px), 1fr);
+  gap: clamp(24px, 5.33vh, 64px);
   justify-items: center;
   align-items: start;
-  width: min(100%, 1100px);
+  width: min(100%, 122.2vh);
 }
 
 .footerHeader {
@@ -34,25 +34,25 @@
 }
 
 .footerDivider {
-  height: 1px;
+  height: 0.11vh;
   background: linear-gradient(90deg, transparent, rgba(232, 213, 176, 0.15) 50%, transparent);
 }
 
 @media (max-width: 900px) {
   .footerGrid {
     grid-template-columns: minmax(0, 1fr);
-    gap: 40px;
-    max-width: 520px;
+    gap: clamp(20px, 4.44vh, 52px);
+    max-width: clamp(300px, 57.78vh, 520px);
   }
 }
 
 @media (max-width: 480px) {
   .footerContainer {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: clamp(12px, 2.22vh, 24px);
+    padding-right: clamp(12px, 2.22vh, 24px);
   }
 
   .footerGrid {
-    gap: 36px;
+    gap: clamp(18px, 4vh, 48px);
   }
 }
