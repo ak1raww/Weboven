@@ -1,0 +1,127 @@
+/* Contact Form details style */
+
+/* Old glass-card style for contact panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 20px 60px rgba(0, 0, 0, 0.4);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    0 30px 80px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(232, 213, 176, 0.08);
+  transform: translateY(-4px);
+}
+
+.formInput {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 16px;
+  color: #F5F5F5;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.formInput:focus {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-color: #E8D5B0;
+  box-shadow: 0 0 15px rgba(232, 213, 176, 0.15);
+}
+
+.formLabel {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: #A0A0A0;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.successMessage {
+  background-color: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+  color: #F5F5F5;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FAQ styles match Web services page */
+.faqQuestion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 18px 24px;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  text-align: left;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.faqQuestion::-webkit-details-marker {
+  display: none;
+}
+
+.faqMinus {
+  display: none;
+}
+
+.faqDetails[open] .faqPlus {
+  display: none;
+}
+
+.faqDetails[open] .faqMinus {
+  display: block;
+}
+
+.faqQuestion:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: rgba(232, 213, 176, 0.2);
+}
+
+.faqAnswer {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: rgba(255, 255, 255, 0.01);
+  border-left: 2px solid #E8D5B0;
+  border-radius: 0 0 12px 12px;
+}
+
+.faqAnswerOpen {
+  max-height: 250px;
+  padding: 16px 24px;
+  margin-top: -4px;
+  border: 1px solid rgba(251, 251, 251, 0.04);
+  border-left: 2px solid #E8D5B0;
+}
