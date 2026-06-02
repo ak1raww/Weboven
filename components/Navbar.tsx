@@ -59,7 +59,6 @@ export default function Navbar() {
     { name: "Social Media", href: "/social" },
     { name: "Il Metodo", href: "/metodo" },
     { name: "Testimonianze", href: "/testimonianze" },
-    { name: "Contatti", href: "/contatto" },
   ];
 
   return (
@@ -90,6 +89,13 @@ export default function Navbar() {
               </Link>
             );
           })}
+          {/* Demo Hub — external link, same tab, always-glowing underline */}
+          <a
+            href="https://demo.weboven.it"
+            className="navLinkDemo"
+          >
+            Demo Hub
+          </a>
         </nav>
 
         {/* Desktop Custom CTA */}
@@ -146,16 +152,13 @@ export default function Navbar() {
               </Link>
             );
           })}
+          {/* Demo Hub mobile — always-glowing underline */}
           <a
             href="https://demo.weboven.it"
-            target="_blank"
-            rel="noopener noreferrer"
             onClick={() => setMobileOpen(false)}
-            className="pulsatingButton mt-4"
+            className="mobileNavLinkDemo"
           >
-            <span>Esplora i Demo Live</span>
-            <ArrowUpRight className="w-4 h-4 flex-shrink-0" />
-            <div className="pulsatingButtonGlow" />
+            Demo Hub
           </a>
           <Link
             href="/contatto"

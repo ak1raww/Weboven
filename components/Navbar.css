@@ -118,3 +118,84 @@
 .mobileNavLink:hover, .mobileNavLinkActive {
   color: #E8D5B0;
 }
+
+/* 1. Hardware-accelerated smooth X-axis translation */
+@keyframes demoGlowSweep {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-66.6666%); 
+  }
+}
+
+/* Container setup for links */
+.navLinkDemo, .mobileNavLinkDemo {
+  position: relative;
+  display: inline-block;
+  color: #E8D5B0;
+  transition: color 0.3s ease;
+  overflow: hidden; 
+}
+
+/* Desktop Demo Hub link */
+.navLinkDemo {
+  padding: 0.44vh 0;
+  font-size: clamp(12px, 1.56vh, 16px);
+  font-weight: 500;
+}
+
+/* Mobile Demo Hub link */
+.mobileNavLinkDemo {
+  font-size: clamp(20px, 2.67vh, 32px);
+  font-weight: 600;
+  font-family: var(--font-display), serif;
+  padding-bottom: 0.3em;
+}
+
+.navLinkDemo:hover, .mobileNavLinkDemo:hover {
+  color: #F5F5F5;
+}
+
+/* 2. Unified, high-performance pseudo-element */
+.navLinkDemo::after, .mobileNavLinkDemo::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  
+  width: 300%; 
+  height: 0.22vh;
+  border-radius: 0.22vh;
+  
+  /* FIXED: 100% SOLID OPAQUE GOLD 
+    No rgba(), no transparency, no background bleed-through.
+    #9A7B3E = Deep Metallic Gold (Replaces the transparent edges)
+    #E8D5B0 = Bright Classic Gold
+    #FFF2D4 = Shimmering Champagne Gold
+  */
+  background: linear-gradient(
+    90deg,
+    #9A7B3E 0%,
+    #E8D5B0 10%,
+    #FFF2D4 16.5%,
+    #E8D5B0 23%,
+    #9A7B3E 33.3333%,
+    
+    #9A7B3E 33.3333%,
+    #E8D5B0 43%,
+    #FFF2D4 50%,
+    #E8D5B0 57%,
+    #9A7B3E 66.6666%,
+    
+    #9A7B3E 66.6666%,
+    #E8D5B0 76%,
+    #FFF2D4 83.5%,
+    #E8D5B0 90%,
+    #9A7B3E 100%
+  );
+  
+  animation: demoGlowSweep 3s linear infinite; 
+  box-shadow: 0 0 0.89vh rgba(232, 213, 176, 0.6); 
+  will-change: transform; 
+}
