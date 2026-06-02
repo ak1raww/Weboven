@@ -20,7 +20,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footerContainer text-[#F5F5F5] py-16 px-6 md:px-12 mt-auto" id="main-footer">
+    <footer className="footerContainer text-[#F5F5F5] py-8 md:py-16 px-6 md:px-12 mt-auto" id="main-footer">
       <div className="footerGrid mx-auto text-center">
         {/* Brand column */}
         <div className="space-y-4 flex flex-col items-center">
@@ -99,7 +99,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="footerDivider my-12" />
+      <div className="footerDivider my-6 md:my-12" />
 
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-center items-center gap-4 text-xs text-[#A0A0A0]">
         <div>

@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Effects from "@/components/Effects";
+import PageTransition from "@/components/PageTransition";
 import { Space_Grotesk, Inter, Playfair_Display } from "next/font/google";
 import { buildMetadata, pageSeo } from "@/lib/seo";
 
@@ -62,7 +63,7 @@ export default function RootLayout({
         <Effects />
         <Navbar />
         <main className="flex-grow pt-28" id="main-content">
-          {children}
+          <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
       </body>
