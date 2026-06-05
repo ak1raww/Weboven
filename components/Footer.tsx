@@ -28,8 +28,9 @@ export default function Footer() {
             Weboven
           </Link>
           <p className="footerText text-sm max-w-sm text-center">
-            Costruiamo strumenti digitali che portano risultati reali, non solo pixel graziosi.
-            Niente fronzoli, niente compromessi. Strumenti pronti a lavorare mentre tu dormi.
+            Sviluppiamo software e siti web progettati per un unico scopo: far crescere il tuo business.
+            <br></br>
+            Il tuo Web, il tuo Futuro.
           </p>
           <div className="flex items-center justify-center gap-4 pt-2">
             <a

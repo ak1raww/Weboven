@@ -17,7 +17,7 @@ const WhatsAppIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
     className={className}
     viewBox="0 0 16 16"
   >
-    <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+    <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
   </svg>
 );
 
@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <div className="space-y-24 md:space-y-36 pb-24 overflow-x-hidden md:px-0">
       <JsonLd data={[organizationJsonLd(), websiteJsonLd(), webPageJsonLd(pageSeo.home)]} />
-      
+
       {/* 1. Hero Section */}
       <section className="pt-8 px-6 text-center max-w-3xl mx-auto space-y-6" id="hero-section">
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight font-display text-white leading-tight">
@@ -71,7 +71,7 @@ export default function Home() {
         <div className="demoHubSection p-8 md:p-14 text-center space-y-8 glass-panel relative group">
           {/* Accent decoration */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-1 bg-gradient-to-r from-transparent via-[#E8D5B0]/50 to-transparent" />
-          
+
           <div className="space-y-4">
             <span className="text-xs uppercase tracking-widest text-[#E8D5B0] font-bold">
               Trasparenza Totale & Sviluppo Tangibile
@@ -80,15 +80,15 @@ export default function Home() {
               Siti Veloci. Senza Scuse.
             </h3>
             <p className="text-sm md:text-base text-[#A0A0A0] max-w-2xl mx-auto leading-relaxed">
-              Non vendiamo mockup grafici creati su Photoshop o promesse vuote. Abbiamo creato un 
-              <strong> Hub di Demo in Tempo Reale</strong> dove puoi toccare con mano, cliccare e misurare la velocità delle nostre architetture. 
-              Nessun codice rallentato da plugin pesanti: solo pura performance Next.js.
+              Non vendiamo bozze grafiche o soluzioni astratte. Il nostro
+              <strong> Hub di Demo Interattive</strong> ti permette di valutare in tempo reale le reali prestazioni delle nostre architetture.
+              Sviluppiamo senza l'ingombro di plugin obsoleti, garantendo la massima velocità grazie a Next.js.
             </p>
           </div>
 
           <div className="py-6 flex flex-col justify-center items-center gap-4">
             {/* The hyperactive animated client CTA button linking to demo.weboven.it */}
-            <a 
+            <a
               href="https://demo.weboven.it"
               target="_blank"
               rel="noopener noreferrer"
@@ -116,13 +116,13 @@ export default function Home() {
         </div>
         <div className="md:col-span-7 space-y-6 text-base text-[#A0A0A0] leading-relaxed">
           <p className="text-[#F5F5F5] font-medium text-lg">
-            Ogni progetto che porto avanti nasce da una domanda semplice: Cosa manca davvero al tuo business per generare più vendite?
+            Ogni mio progetto parte da qui: <br></br><strong>Cosa manca davvero al tuo business?</strong>
           </p>
           <p>
-            Non mi interessa fare siti statici copia-incollati da templates preposti. Mi interessa costruire strumenti digitali che lavorano per te mentre dormi, che si integrano coi tuoi processi e riducono l&apos;esitazione del cliente finale.
+            L'interesse di molte "aziende digitali" è venderti un sito, non farti crescere. Io non sono un azienda, sono una persona che studia il tuo business, i tuoi clienti e il tuo mercato per costruire un sito che non sia solo bello, ma che funzioni davvero.
           </p>
           <p>
-            Se hai un&apos;attività commerciale o di servizi oggi e non possiedi una forte, riconoscibile identità online, stai solo perdendo possibili clienti preziosi, giorno dopo giorno, a favore della concorrenza. Riempiamo noi questo vuoto.
+            Non essere presenti online oggi non significa solo "non avere un sito": significa essere invisibili a migliaia di potenziali clienti che ti stanno già cercando.
           </p>
         </div>
       </section>
@@ -135,7 +135,7 @@ export default function Home() {
             Due Aree. Un Solo Obiettivo.
           </h3>
           <p className="text-sm md:text-base text-[#A0A0A0] max-w-xl mx-auto">
-            Evitiamo pacchetti complessi. Uniamo la programmazione pura alla gestione strategica dei tuoi profili.
+            Le basi fondamentali al giorno d&apos;oggi.
           </p>
         </div>
 
@@ -154,7 +154,7 @@ export default function Home() {
                 <p className="text-xs italic text-[#E8D5B0]">Siti, il necessario.</p>
               </div>
               <p className="text-sm md:text-base text-[#A0A0A0] leading-relaxed">
-                Siti vetrina, e-commerce completi e applicazioni web interattive su misura. Niente template pre-fatti o costruttori amatoriali che rallentano la navigazione. Analizzo il tuo business e creo un codice veloce, pulito, modellato attorno al tuo cliente.
+                Siti vetrina, e-commerce completi e applicazioni web interattive su misura. Niente template pre-fatti o costruttori amatoriali che rallentano la navigazione. Analizzo il tuo business, creo, collego, svolgo tutti i passaggi affinché tutto sia online e senza problemi.
               </p>
             </div>
             <div className="pt-8">

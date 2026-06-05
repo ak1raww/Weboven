@@ -57,20 +57,20 @@ export default function WebServices() {
 
   const faqs = [
     {
-      q: "Quanto costa lo sviluppo di un sito?",
-      a: "La risposta sincera è: dipende dalla complessità del progetto. Preferisco prima conoscere bene le tue necessità e i tuoi obiettivi di crescita. In seguito ti offro un preventivo chiaro e bloccato. In linea di massima, i nostri siti web di qualità superiore partono da un investimento minimo di 500€."
+      q: "Quanto costa?",
+      a: "La risposta sincera è: Dipende dal progetto. Tendo prima a conoscere la persona e le sue esigenze, dopodichè, in base alla complessità del progetto, ti faccio un preventivo su misura. In linea di massima, un mio sito di qualità parte da 500€."
     },
     {
-      q: "Quanto tempo ci vuole per vederlo online?",
-      a: "Dipende dalla velocità dei tuoi feedback e dall'articolazione delle pagine. Un progetto di atterraggio promozionale richiederà solitamente circa una settimana; un e-commerce esteso o con integrazioni gestionali piò occupare circa un mese completo di lavoro di design e codice."
+      q: "Quanto tempo ci vuole?",
+      a: "Dipende dalla complessità e da quanto sei reattivo nei feedback. Il progetto meno impegnativo mi ha preso una settimana. Quello più complesso quasi un mese."
     },
     {
-      q: "Potrò gestire e modificare i testi da solo in autonomia?",
-      a: "Assolutamente sì. Se te la senti e lo desideri, allestisco pannelli d'amministrazione intuitivi e ti fornisco brevi guide video personalizzate per compiere aggiornamenti in autonomia. In alternativa, puoi commissionare modifiche complesse direttamente a me in qualsiasi momento."
+      q: "Posso gestire il sito da solo dopo?",
+      a: "Se te la senti, assolutamente si! Ti posso fare da guida per aiutarti a capire il funzionamento del sito e di come gestire i dati al suo interno. Se invece non te la senti, ci sono sempre io a tua disposizione!"
     },
     {
       q: "Ho già un sito obsoleto o che non performa, cosa possiamo fare?",
-      a: "Se possiedi un sito brutto, non indicizzato o creato anni fa con Framework obsoleti e pesanti, analizziamo i problemi congiuntamente. Ripariamo i danni strutturali, rifacciamo il design e manteniamo intatto il tuo posizionamento SEO esistente facendoti fare un salto generazionale."
+      a: "Se hai già un sito che non funziona come dovrebbe, o ti è stato creato da un ragazzo in giacca e cravatta che ''sa fare siti'' e ti ha creato un sito con Framework di 20 anni fa, chiedendoti una cifra considerevole per un sito brutto e copia incollato, ci penso io a riparare i danni."
     }
   ];
 

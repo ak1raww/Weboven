@@ -29,14 +29,14 @@
   --font-sans: var(--font-body), system-ui, -apple-system, sans-serif;
   --font-display: 'Cinzel', serif;
   --font-brand: 'Cal Sans', sans-serif;
-  
+
   --color-brand-gold: #E8D5B0;
   --color-brand-black: #0A0A0A;
   --color-brand-surface: rgba(255, 255, 255, 0.03);
   --color-brand-border: rgba(255, 255, 255, 0.06);
   --color-brand-gray: #A0A0A0;
   --color-brand-white: #F5F5F5;
-  
+
   --animate-shimmer: shimmer 8s infinite linear;
   --animate-border-pulsate: border-pulsate 4s infinite ease-in-out;
 }
@@ -78,7 +78,8 @@ h4 {
   font-size: 1.1rem !important;
 }
 
-.font-display, .heroTitle {
+.font-display,
+.heroTitle {
   font-family: 'Cinzel', serif !important;
 }
 
@@ -86,16 +87,20 @@ h4 {
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
 }
 
 @keyframes border-pulsate {
-  0%, 100% {
+
+  0%,
+  100% {
     border-color: rgba(232, 213, 176, 0.2);
     box-shadow: 0 0 10px rgba(232, 213, 176, 0.1);
   }
+
   50% {
     border-color: rgba(232, 213, 176, 0.85);
     box-shadow: 0 0 25px rgba(232, 213, 176, 0.45);
@@ -127,14 +132,12 @@ h4 {
 }
 
 .text-shimmer-effect {
-  background: linear-gradient(
-    90deg,
-    #F5F5F5 0%,
-    #E8D5B0 25%,
-    #FFF 50%,
-    #E8D5B0 75%,
-    #F5F5F5 100%
-  );
+  background: linear-gradient(90deg,
+      #F5F5F5 0%,
+      #E8D5B0 25%,
+      #FFF 50%,
+      #E8D5B0 75%,
+      #F5F5F5 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -147,7 +150,8 @@ h4 {
   position: relative;
 }
 
-.strike-bg::before, .strike-bg::after {
+.strike-bg::before,
+.strike-bg::after {
   content: "";
   position: absolute;
   top: 0;
@@ -190,6 +194,7 @@ h4 {
     opacity: 0;
     transform: translateY(6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

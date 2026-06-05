@@ -54,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="it"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${playfairDisplay.variable} scroll-smooth`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${playfairDisplay.variable} scroll-smooth`} suppressHydrationWarning
     >
       <body
         className="bg-[#0A0A0A] text-[#F5F5F5] font-sans antialiased min-h-screen flex flex-col selection:bg-[#E8D5B0]/30 selection:text-[#E8D5B0]"
